@@ -1,0 +1,12 @@
+Package: modifiedmk
+Title: Modified Mann Kendall Test With Hamed and Rao (1998) and Yue and Wang (1998) Variance Correction Approach
+Version: 0.0.0.9000
+Authors@R: person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre"))
+Description: Power of Non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series is modified by removing any trend component existing in the data and calculating effective sample size as proposed by Hamed and Rao (1998) and Yue and Wang (2004).  
+Depends: R (>= 3.4.2)
+License: AGPL-3
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+Suggests: testthat, knitr
