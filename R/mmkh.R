@@ -139,10 +139,10 @@ mmkh <-function(x, ci=0.95) {
   # Calculating Mann-Kendall Variance before correction (Var(s))
 
   var.S = n*(n-1)*(2*n+5)*(1/18)
-  if(length(unique(xn)) < n) {
-    unique(xn) -> aux
+  if(length(unique(x)) < n) {
+    unique(x) -> aux
     for (i in 1:length(aux)) {
-      length(which(xn == aux[i])) -> tie
+      length(which(x == aux[i])) -> tie
       if (tie > 1) {
         var.S = var.S - tie*(tie-1)*(2*tie+5)*(1/18)
       }
@@ -177,6 +177,6 @@ mmkh <-function(x, ci=0.95) {
   Tau = S/(.5*n*(n-1))
 
 
-  return(list("Corrected Zc" = z, "new P.value" = pval,"N/N*" = essf,"Z" = z0, "P-value" = pval0,  "Tau" = Tau,  "Sen's Slope" = slp))
+  return(c("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }
 
