@@ -91,7 +91,7 @@ mmky <-function(x) {
 
     for (i in 1:(n-1)) {
     for (j in (i+1):n) {
-      S = S + sign(xn[j]-xn[i])
+      S = S + sign(x[j]-x[i])
     }
   }
 
@@ -162,6 +162,6 @@ mmky <-function(x) {
 
 
 
-  return(list("Corrected Zc" = z, "Corrected p.value" = pval,"N/N*s" = essf,"Z" = z0, "p.value" = pval0,  "tau" = Tau,  "Sen's Slope" = slp))
+  return(list("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }
 

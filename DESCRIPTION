@@ -1,12 +1,14 @@
 Package: modifiedmk
-Title: Modified Mann Kendall Test With Hamed and Rao (1998) and Yue and Wang (1998) Variance Correction Approach
-Version: 0.0.0.9000
+Title: Modified Mann Kendall Trend Tests with Variance Correction Approach
+Version: 0.1.0
 Authors@R: person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre"))
-Description: Power of Non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series is modified by removing any trend component existing in the data and calculating effective sample size as proposed by Hamed and Rao (1998) and Yue and Wang (2004).  
+Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series is modified by removing any trend component existing in the data and calculating effective sample size.
+    Hamed, K. H., & Ramachandra Rao, A. (1998). A modified Mann-Kendall trend test for auto correlated data. Journal of Hydrology, 204(1–4), 182–196. <doi:10.1016/S0022-1694(97)00125-X>.
+    Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
 Depends: R (>= 3.4.2)
 License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-Suggests: testthat, knitr
+Suggests: trend, testthat, knitr, rmarkdown

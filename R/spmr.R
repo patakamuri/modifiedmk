@@ -26,7 +26,7 @@ spear<-function(x){
   xi<-1:length(x)
 
 #Calculating ranks of the data
-  yi<-rank(x)
+  yi<-as.integer(rank(x))
 
 
 # calculating Sx,Sy and Sxy

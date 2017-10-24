@@ -80,6 +80,23 @@ mmkh3lag <-function(x, ci=0.95) {
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
 
+# Calculating Sen's slope
+  n <- length(x)
+  rep(NA, n * (n - 1)/2) -> V
+  k = 0
+  for (i in 1:(n-1)) {
+    for (j in (i+1):n) {
+      k = k+1
+      V[k] = (x[j]-x[i])/(j-i)
+    }
+  }
+  median(V,na.rm=TRUE)->slp
+
+# Calculating Trend-Free Series
+
+  t=1:length(x)
+  xn<-(x[1:n])-((slp)*(t))
+
 # Calculating Mann-Kendall 'S'- Statistic
 
   n <- length(x)
@@ -91,7 +108,7 @@ mmkh3lag <-function(x, ci=0.95) {
 
 # Calculating auto-correlation function of the ranks of observations (ro)
 
-  acf(rank(x), lag.max=3, plot=FALSE)$acf[-1] -> ro
+  acf(rank(xn), lag.max=3, plot=FALSE)$acf[-1] -> ro
 
 # Calculating significant auto-correlation at given confidance interval (rof)
 
@@ -172,6 +189,6 @@ mmkh3lag <-function(x, ci=0.95) {
   }
   median(V,na.rm=TRUE)->slp
 
-  return(list("Corrected Zc" = z, "Corrected p.value" = pval,"N/N*s" = essf,"Z" = z0, "p.value" = pval0,  "tau" = Tau,  "Sen's Slope" = slp))
+  return(list("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }
 
