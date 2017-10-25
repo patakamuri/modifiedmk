@@ -26,3 +26,4 @@ The package contains the following varians of Trend-Tests
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/modifiedmk)](https://cran.r-project.org/package=modifiedmk)
 
+[![Coverage Status](https://coveralls.io/repos/github/patakamuri/modifiedmk/badge.svg?branch=master)](https://coveralls.io/github/patakamuri/modifiedmk?branch=master)
