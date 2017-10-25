@@ -162,6 +162,6 @@ mmky1lag <-function(x) {
 
 
 
-  return(list("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
+  return(c("Corrected Zc" = z, "new P-value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }
 

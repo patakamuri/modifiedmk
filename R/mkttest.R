@@ -119,7 +119,7 @@ mkttest <-function(x) {
   median(V,na.rm=TRUE)->slp
 
 
-  return(list("Z-Value" = z,"Sen's Slope"= slp, "P.value" = pval,"S" = S, "Var(S)" = var.S, "Tau"=Tau))
+  return(c("Z-Value" = z,"Sen's Slope"= slp, "P-value" = pval,"S" = S, "Var(S)" = var.S, "Tau"=Tau))
 
 }
 
