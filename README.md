@@ -21,6 +21,8 @@ The package contains the following varians of Trend-Tests
 
 - Trend magnitude is calculated by Sen's slope method 
 
-<center>
+
 [![Build Status](https://travis-ci.org/patakamuri/modifiedmk.svg?branch=master)](https://travis-ci.org/patakamuri/modifiedmk)
-</center>
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/modifiedmk)](https://cran.r-project.org/package=modifiedmk)
+
