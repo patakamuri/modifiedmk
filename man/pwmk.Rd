@@ -2,7 +2,7 @@
 % Please edit documentation in R/pwmk.R
 \name{pwmk}
 \alias{pwmk}
-\title{Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using (Yue and Wang 2002) Approach.}
+\title{Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Wang (2002) Approach.}
 \usage{
 pwmk(x)
 }
@@ -12,7 +12,9 @@ pwmk(x)
 \value{
 Z-Value  - Z-Statistic after variance Correction
 
-Sen's Slope  - Sen's slope
+Sen's Slope  - Sen's slope for Prewhitened series
+
+old. Sen's Slope  - Sen's slope for Original data series 'x'
 
 P-value  - P-Value after variance correction
 
@@ -26,7 +28,7 @@ Tau  - Mann-Kendall's Tau
 When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
 }
 \details{
-Pre-Whitening involves calculating lag-1 serial correlation coefficient and claculating new-series.
+Pre-Whitening involves calculating lag-1 serial correlation coefficient and calculating new-series.
 }
 \examples{
 x<-c(Nile)

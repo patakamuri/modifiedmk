@@ -2,7 +2,7 @@
 % Please edit documentation in R/mmkh3.R
 \name{mmkh3lag}
 \alias{mmkh3lag}
-\title{Modified Mann-Kendall Test For Serially Correlated Data Using Hamed and Rao (1998) Variance Correction Approach.}
+\title{Modified Mann-Kendall Test For Serially Correlated Data Using Hamed and Rao (1998) Variance Correction Approach Considering Only First Three Significant Lags.}
 \usage{
 mmkh3lag(x,ci=0.95)
 }

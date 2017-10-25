@@ -2,7 +2,7 @@
 % Please edit documentation in R/tfpwmk.R
 \name{tfpwmk}
 \alias{tfpwmk}
-\title{Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using (Yue and Wang 2002) Approach.}
+\title{Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pion (2002) Approach.}
 \usage{
 tfpwmk(x)
 }
@@ -12,7 +12,9 @@ tfpwmk(x)
 \value{
 Z-Value  - Z-Statistic after variance Correction
 
-Sen's Slope  - Sen's slope
+Sen's Slope  - Sen's slope for TFPW series
+
+old. Sen's Slope  - Sen's slope for Original data series 'x'
 
 P-value  - P-Value after variance correction
 

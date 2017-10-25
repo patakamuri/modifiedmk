@@ -1,4 +1,4 @@
-#' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using (Yue and Wang 2002) Approach.
+#' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pion (2002) Approach.
 #'
 #' @description When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
 #'

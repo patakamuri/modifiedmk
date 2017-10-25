@@ -1,4 +1,4 @@
-#' @title Mann-Kendall Trend Test of Time series Data
+#' @title Mann-Kendall Trend Test of Time series Data with out any modifications
 #'
 #' @description Mann-Kendall trend test is a non-parametric trend test used to identify the monotonic trends present in time series data.
 #'

@@ -1,14 +1,10 @@
-#' @title Modified Mann-Kendall Test For Serially Correlated Data Using Hamed and Rao (1998) Variance Correction Approach Considering Only First Three Significant Lags.
+#' @title Modified Mann-Kendall Test For Serially Correlated Data Using Yue and Wang (2004) Variance Correction Approach Considering Lag-1 Correlation Coefficient.
 #'
-#' @description Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Hamed and Rao (1998) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calulated using significant serial correlation coefficients.
+#' @description Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Yue and Wang (2004) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calculated using significant serial correlation coefficients.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
-#' @usage mmkh3lag(x,ci=0.95)
-#'
 #' @param  x  - Time series data vector
-#'
-#' @param  ci - Confidence Interval
 #'
 #' @return  Zc  - Z-Statistic after variance Correction
 #'
@@ -24,6 +20,7 @@
 #'
 #' Sen's Slope  - Sen's slope
 #'
+#' @export
 #'
 #' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. http://doi.org/10.1017/CBO9781107415324.004
 #'
@@ -31,30 +28,24 @@
 #'
 #' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. http://doi.org/10.2307/2285891
 #'
-#' @references Hamed, K. H., & Ramachandra Rao, A. (1998). A modified Mann-Kendall trend test for autocorrelated data. Journal of Hydrology, 204(1–4), 182–196. http://doi.org/10.1016/S0022-1694(97)00125-X
-#'
-#' @references Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003). Nonstationarities in hydrologic and environmental time series. http://doi.org/10.1007/978-94-010-0117-5
-#'
-#' @references Salas, J.D., 1980. Applied modeling of hydrologic times series. Water Resources Publication.
-#'
-#' @details Trend free time series is constructed by calculating Sen's slope and Auto Correlation coefficient AR(1). Variance correction approach proposed by Hamed and Rao (1998) uses only significant values from all the available values of Auto-Correlation Coefficients. As suggested by Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003), only first three Auto-Correlation coefficients are used.
+#' @references Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. http://doi.org/10.1023/B:WARM.0000043140.61082.60
 #'
 #' @examples x<-c(Nile)
-#' mmkh3lag(x)
+#' mmky(x)
 #'
 #' @export
-
-mmkh3lag <-function(x, ci=0.95) {
+#'
+mmky1lag <-function(x) {
 
 # Initialize the test Parameters
 
 # Time-Series Vector
   x = x
-# Modified Z-Statistic after Variance Correction by Hamed&Rao(1998) method
+# Modified Z-Statistic after Variance Correction as per Yue and Wang (2004)) method
   z = NULL
 # Original Z-Statistic for Mann-Kendall test before variance correction
   z0 = NULL
-# Modified Z-Statistic after Variance Correction by Hamed&Rao(1998) method
+# Modified Z-Statistic after Variance Correction as per Yue and Wang (2004) method
   pval = NULL
 # Original P-Value for Mann-Kendall test before variance correction
   pval0 = NULL
@@ -62,10 +53,8 @@ mmkh3lag <-function(x, ci=0.95) {
   S = 0
 # Initialize Mann-Kendall Tau
   Tau = NULL
-# Correction factor n/n* value
+# Correction factor n/n* value as per Yue and Wang (2004) method
   essf = NULL
-# Confidance Interval
-  ci = ci
 
 # To test whether the data is in vector format
 
@@ -80,7 +69,8 @@ mmkh3lag <-function(x, ci=0.95) {
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
 
-# Calculating Sen's slope
+  # Calculating Sen's slope
+
   n <- length(x)
   rep(NA, n * (n - 1)/2) -> V
   k = 0
@@ -95,11 +85,10 @@ mmkh3lag <-function(x, ci=0.95) {
 # Calculating Trend-Free Series
 
   t=1:length(x)
-  xn<-(x[1:n])-((slp)*(t))
+  xn=(x[1:n])-((slp)*(t))
 
 # Calculating Mann-Kendall 'S'- Statistic
 
-  n <- length(x)
     for (i in 1:(n-1)) {
     for (j in (i+1):n) {
       S = S + sign(x[j]-x[i])
@@ -107,39 +96,31 @@ mmkh3lag <-function(x, ci=0.95) {
   }
 
 # Calculating auto-correlation function of the ranks of observations (ro)
+  #lag.max can be edited to include more number of lags
 
-  acf(rank(xn), lag.max=3, plot=FALSE)$acf[-1] -> ro
+  acf(xn, lag.max=1, plot=FALSE)$acf[-1] -> ro
 
 # Calculating significant auto-correlation at given confidance interval (rof)
 
-  qnorm((1+ci)/2)/sqrt(n) -> sig
+
   rep(NA,length(ro)) -> rof
   for (i in 1:(length(ro))) {
-    if(ro[i] > sig || ro[i] < -sig) {
-      rof[i] <- ro[i]
-    } else {
-      rof[i] = 0
-    }
+    rof[i] <- ro[i]
   }
 
-# Calculating 2/(n*(n-1)*(n-2))
 
-  2 / (n*(n-1)*(n-2)) -> cte
+# Calculating sum(1-(k/n))*rof[i]) for k=1,2...,(n-1)
 
-# Calculating sum(((n-i)*(n-i-1)*(n-i-2)*rof[i]
+  ess=(1-(1/n))*(rof)
 
-  ess=0
-      for (i in 1:3) {
-            ess = ess + (n-i)*(n-i-1)*(n-i-2)*rof[i]
-      }
 
-# Calculating variance correction factor (n/n*) as per Hamed and Rao(1994)
+# Calculating variance correction factor (n/n*) as per Yue and Wang (2004)
 
-  essf = 1 + ess*cte
+  essf = 1 + 2*(ess)
 
 # Calculating Mann-Kendall Variance before correction (Var(s))
 
-  var.S = n*(n-1)*(2*n+5)*(1/18)
+  var.S = n*(n-1)*(2*n+5)*(1/18);
       if(length(unique(x)) < n) {
             unique(x) -> aux
             for (i in 1:length(aux)) {
@@ -150,7 +131,7 @@ mmkh3lag <-function(x, ci=0.95) {
             }
       }
 
-# Calculating new variance  Var(s)*=(Var(s))*(n/n*)  as per Hamed and Rao(1994)
+# Calculating new variance  Var(s)*=(Var(s))*(n/n*)  as per Yue and Wang (2004)
 
   VS = var.S * essf
 
@@ -171,23 +152,15 @@ mmkh3lag <-function(x, ci=0.95) {
 # Calculating P-Value before and after Variance coorection
 
   pval = 2*pnorm(-abs(z))
-      pval0 = 2*pnorm(-abs(z0))
+  pval0 = 2*pnorm(-abs(z0))
 
 # Calculating kendall's Tau
 
   Tau = S/(.5*n*(n-1))
 
-# Calculating Sen's slope
+# Listing all outputs
 
-  rep(NA, n * (n - 1)/2) -> V
-  k = 0
-  for (i in 1:(n-1)) {
-    for (j in (i+1):n) {
-      k = k+1
-      V[k] = (x[j]-x[i])/(j-i)
-    }
-  }
-  median(V,na.rm=TRUE)->slp
+
 
   return(list("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }

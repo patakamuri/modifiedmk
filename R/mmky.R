@@ -37,32 +37,32 @@
 #'
 mmky <-function(x) {
 
-# Initialize the test Parameters
+  # Initialize the test Parameters
 
-# Time-Series Vector
+  # Time-Series Vector
   x = x
-# Modified Z-Statistic after Variance Correction as per Yue and Wang (2004)) method
+  # Modified Z-Statistic after Variance Correction as per Yue and Wang (2004)) method
   z = NULL
-# Original Z-Statistic for Mann-Kendall test before variance correction
+  # Original Z-Statistic for Mann-Kendall test before variance correction
   z0 = NULL
-# Modified Z-Statistic after Variance Correction as per Yue and Wang (2004) method
+  # Modified Z-Statistic after Variance Correction as per Yue and Wang (2004) method
   pval = NULL
-# Original P-Value for Mann-Kendall test before variance correction
+  # Original P-Value for Mann-Kendall test before variance correction
   pval0 = NULL
-# Initialize Mann-Kendall 'S'- Statistic
+  # Initialize Mann-Kendall 'S'- Statistic
   S = 0
-# Initialize Mann-Kendall Tau
+  # Initialize Mann-Kendall Tau
   Tau = NULL
-# Correction factor n/n* value as per Yue and Wang (2004) method
+  # Correction factor n/n* value as per Yue and Wang (2004) method
   essf = NULL
 
-# To test whether the data is in vector format
+  # To test whether the data is in vector format
 
   if (is.vector(x) == FALSE) {
     stop("Input data must be a vector")
   }
 
-# To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
+  # To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
 
   if (any(is.finite(x) == FALSE)) {
     x[-c(which(is.finite(x) == FALSE))] -> x
@@ -82,25 +82,25 @@ mmky <-function(x) {
   }
   median(V,na.rm=TRUE)->slp
 
-# Calculating Trend-Free Series
+  # Calculating Trend-Free Series
 
   t=1:length(x)
   xn=(x[1:n])-((slp)*(t))
 
-# Calculating Mann-Kendall 'S'- Statistic
+  # Calculating Mann-Kendall 'S'- Statistic
 
-    for (i in 1:(n-1)) {
+  for (i in 1:(n-1)) {
     for (j in (i+1):n) {
       S = S + sign(x[j]-x[i])
     }
   }
 
-# Calculating auto-correlation function of the ranks of observations (ro)
+  # Calculating auto-correlation function of the ranks of observations (ro)
   #lag.max can be edited to include more number of lags
 
-  acf(xn, lag.max=1, plot=FALSE)$acf[-1] -> ro
+  acf(xn, lag.max=(n-1), plot=FALSE)$acf[-1] -> ro
 
-# Calculating significant auto-correlation at given confidance interval (rof)
+  # Calculating significant auto-correlation at given confidance interval (rof)
 
 
   rep(NA,length(ro)) -> rof
@@ -109,59 +109,63 @@ mmky <-function(x) {
   }
 
 
-# Calculating sum(1-(k/n))*rof[i]) for k=1,2...,(n-1)
+  # Calculating sum(1-(k/n))*rof[i]) for k=1,2...,(n-1)
+  ess=0
+  for(k in 1:(n-1))
+      {
+    ess=ess+(1-(k/n))*rof[k]
+    }
 
-  ess=(1-(1/n))*(rof)
 
 
-# Calculating variance correction factor (n/n*) as per Yue and Wang (2004)
+  # Calculating variance correction factor (n/n*) as per Yue and Wang (2004)
 
   essf = 1 + 2*(ess)
 
-# Calculating Mann-Kendall Variance before correction (Var(s))
+  # Calculating Mann-Kendall Variance before correction (Var(s))
 
   var.S = n*(n-1)*(2*n+5)*(1/18);
-      if(length(unique(x)) < n) {
-            unique(x) -> aux
-            for (i in 1:length(aux)) {
-                  length(which(x == aux[i])) -> tie
-                  if (tie > 1) {
-                        var.S = var.S - tie*(tie-1)*(2*tie+5)*(1/18)
-                  }
-            }
+  if(length(unique(x)) < n) {
+    unique(x) -> aux
+    for (i in 1:length(aux)) {
+      length(which(x == aux[i])) -> tie
+      if (tie > 1) {
+        var.S = var.S - tie*(tie-1)*(2*tie+5)*(1/18)
       }
+    }
+  }
 
-# Calculating new variance  Var(s)*=(Var(s))*(n/n*)  as per Yue and Wang (2004)
+  # Calculating new variance  Var(s)*=(Var(s))*(n/n*)  as per Yue and Wang (2004)
 
   VS = var.S * essf
 
-# Calculating Z-Statistic values before and after Variance coorection
+  # Calculating Z-Statistic values before and after Variance coorection
 
- if (S == 0) {
-            z = 0
-            z0 = 0
-      }
-      if (S > 0) {
-            z = (S-1)/sqrt(VS)
-            z0 = (S-1)/sqrt(var.S)
-      } else {
-            z = (S+1)/sqrt(VS)
-            z0 = (S+1)/sqrt(var.S)
-      }
+  if (S == 0) {
+    z = 0
+    z0 = 0
+  }
+  if (S > 0) {
+    z = (S-1)/sqrt(VS)
+    z0 = (S-1)/sqrt(var.S)
+  } else {
+    z = (S+1)/sqrt(VS)
+    z0 = (S+1)/sqrt(var.S)
+  }
 
-# Calculating P-Value before and after Variance coorection
+  # Calculating P-Value before and after Variance coorection
 
   pval = 2*pnorm(-abs(z))
   pval0 = 2*pnorm(-abs(z0))
 
-# Calculating kendall's Tau
+  # Calculating kendall's Tau
 
   Tau = S/(.5*n*(n-1))
 
-# Listing all outputs
+  # Listing all outputs
 
 
 
-  return(list("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
+  return(c("Corrected Zc" = z, "new P.value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
 }
 
