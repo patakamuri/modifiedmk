@@ -28,7 +28,7 @@
 #'
 #' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>
 #'
-#' @references Yue, Sheng, Paul Pilon, Bob Phinney, and George Cavadias. 2002. “The Influence of Autocorrelation on the Ability to Detect Trend in Hydrological Series.” Hydrological Processes 16 (9): 1807–29. <doi:10.1002/hyp.1095>.
+#' @references Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9), 1807–1829. <doi:10.1002/hyp.1095>.
 #'
 #' @references Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
 #'

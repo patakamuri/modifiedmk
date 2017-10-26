@@ -1,10 +1,13 @@
 Package: modifiedmk
-Title: Modified Mann Kendall Trend Tests with Variance Correction Approach
-Version: 0.1.0
+Title: Modified Mann Kendall Trend Tests with Pre Whitened Series, Trend Free Pre Whitening series, Variance Correction Approach and Spearman's Rank Correlation Test
+Version: 0.1.1
 Authors@R: person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre"))
-Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series is modified by removing any trend component existing in the data and calculating effective sample size.
-    Hamed, K. H., & Ramachandra Rao, A. (1998). A modified Mann-Kendall trend test for auto correlated data. Journal of Hydrology, 204(1–4), 182–196. <doi:10.1016/S0022-1694(97)00125-X>.
-    Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
+Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series is modified by any of the following approaches namely Prewhitening(PW), Trend Free Prewhitening (TFPW), and Variance Correction Approaches by calculating effective sample size.
+    Yue, S., & Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), 4-1-4â€“7. <doi:10.1029/2001WR000861>.
+    Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9), 1807â€“1829. <doi:10.1002/hyp.1095>.
+    Hamed, K. H., & Ramachandra Rao, A. (1998). A modified Mann-Kendall trend test for auto correlated data. Journal of Hydrology, 204(1?4), 182?196. <doi:10.1016/S0022-1694(97)00125-X>.
+    Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201?218. <doi:10.1023/B:WARM.0000043140.61082.60>.
+    
 Depends: R (>= 3.4.2)
 License: AGPL-3
 Encoding: UTF-8
@@ -13,3 +16,4 @@ VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Suggests: trend, testthat, knitr, rmarkdown,
     covr
+
