@@ -3,16 +3,3 @@
 language: R
 sudo: false
 cache: packages
-<<<<<<< HEAD
-
-=======
->>>>>>> 910ff6da2505013d7e958489a29f7758bc4aadfa
-service_name: travis-pro
-repo_token: bHA8HDeLfmzJp8EMkDWng63sAjQjH0scW
-
-r_github_packages:
-  - jimhester/covr
-
- after_success:
--  - Rscript -e 'library(covr); codecov()'
-+  - Rscript -e 'covr::codecov()'
