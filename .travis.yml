@@ -3,7 +3,10 @@
 language: R
 sudo: false
 cache: packages
+<<<<<<< HEAD
 
+=======
+>>>>>>> 910ff6da2505013d7e958489a29f7758bc4aadfa
 service_name: travis-pro
 repo_token: bHA8HDeLfmzJp8EMkDWng63sAjQjH0scW
 
