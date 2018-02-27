@@ -1,6 +1,6 @@
 #' @title Mann-Kendall Trend Test of Time series Data with out any modifications
 #'
-#' @description Mann-Kendall trend test is a non-parametric trend test used to identify the monotonic trends present in time series data.
+#' @description Mann-Kendall trend test is a non-parametric trend test used to identify monotonic trends present in time series data.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
@@ -119,7 +119,12 @@ mkttest <-function(x) {
   median(V,na.rm=TRUE)->slp
 
 
-  return(c("Z-Value" = z,"Sen's slope"= slp, "P-value" = pval,"S" = S, "Var(S)" = var.S, "Tau"=Tau))
+  return(c("Z-Value" = z,
+           "Sen's slope"= slp,
+           "S" = S,
+           "Var(S)" = var.S,
+           "P-value" = pval,
+           "Tau"=Tau))
 
 }
 

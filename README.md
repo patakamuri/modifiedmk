@@ -26,4 +26,6 @@ The package contains the following varians of Trend-Tests
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/modifiedmk)](https://cran.r-project.org/package=modifiedmk)
 
+[![Rdoc](http://www.rdocumentation.org/badges/version/modifiedmk)](http://www.rdocumentation.org/packages/modifiedmk)
+
 

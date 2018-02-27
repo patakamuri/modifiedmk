@@ -8,13 +8,13 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Z-Value  - Z-Statistic after variance Correction
+#' @return  Z-Value  - Z-Statistic after Pre-Whitening
 #'
 #' Sen's Slope  - Sen's slope for Prewhitened series
 #'
 #' old. Sen's Slope  - Sen's slope for Original data series 'x'
 #'
-#' P-value  - P-Value after variance correction
+#' P-value  - P-Value after Pre-Whitening
 #'
 #' S  - Mann-Kendall 'S'- statistic
 #'
@@ -153,6 +153,12 @@ pwmk <-function(x) {
   median(W,na.rm=TRUE)->slp1
 
 
-  return(c("Z-Value" = z,"Sen's Slope"= slp1, "old. Sen's Slope"= slp,"P-value" = pval,"S" = S, "Var(S)" = var.S, "Tau"=Tau))
+  return(c("Z-Value" = z,
+           "Sen's Slope"= slp1,
+           "old. Sen's Slope"= slp,
+           "P-value" = pval,
+           "S" = S,
+           "Var(S)" = var.S,
+           "Tau"=Tau))
 }
 

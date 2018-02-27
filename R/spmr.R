@@ -55,5 +55,6 @@ spear<-function(x){
 # Calculating Rho(s)*sqrt(n-1)
   tsrc<-rhos*sqrt(length(x))
 
-  return(c("Correlation coefficient" = rhos, "Test Statistics" = tsrc))
+  return(c("Correlation coefficient" = rhos,
+           "Test Statistics" = tsrc))
 }

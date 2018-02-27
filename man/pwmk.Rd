@@ -10,13 +10,13 @@ pwmk(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z-Value  - Z-Statistic after variance Correction
+Z-Value  - Z-Statistic after Pre-Whitening
 
 Sen's Slope  - Sen's slope for Prewhitened series
 
 old. Sen's Slope  - Sen's slope for Original data series 'x'
 
-P-value  - P-Value after variance correction
+P-value  - P-Value after Pre-Whitening
 
 S  - Mann-Kendall 'S'- statistic
 

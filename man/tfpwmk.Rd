@@ -10,13 +10,13 @@ tfpwmk(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z-Value  - Z-Statistic after variance Correction
+Z-Value  - Z-Statistic after Trend-Free Prewhitening
 
 Sen's Slope  - Sen's slope for TFPW series
 
 old. Sen's Slope  - Sen's slope for Original data series 'x'
 
-P-value  - P-Value after variance correction
+P-value  - P-Value after Trend-Free Prewhitening
 
 S  - Mann-Kendall 'S'- statistic
 
@@ -25,7 +25,7 @@ Var(s) - Variance of 's'
 Tau  - Mann-Kendall's Tau
 }
 \description{
-When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
+When the time series data is not random and influenced by auto-correlation, trend component is removed from the data and is Pre-Whitened prior to application of trend test in TFPW approach.
 }
 \details{
 Trend component is removed from the original data and sujected to Pre-Whitening by calculating lag-1 serial correlation coefficient. The data thus generated is tested with Mann-Kendall trend test.

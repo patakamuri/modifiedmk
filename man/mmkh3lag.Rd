@@ -12,25 +12,29 @@ mmkh3lag(x,ci=0.95)
 \item{ci}{- Confidence Interval}
 }
 \value{
-Zc  - Z-Statistic after variance Correction
+Corrected Zc  - Z-Statistic after variance Correction
 
 new P.value  - P-Value after variance correction
 
 N/N*  - Effective sample size
 
-Z  - Original Mann-Kendall Z-Statistic
+Original Z  - Original Mann-Kendall Z-Statistic
 
-P-value  - Original Mann-Kendall P-Value
+Old P-value  - Original Mann-Kendall P-Value
 
 Tau  - Mann-Kendall's Tau
 
 Sen's Slope  - Sen's slope
+
+old.variance - Old variance before variance Correction
+
+new.variance - Variance after correction
 }
 \description{
 Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Hamed and Rao (1998) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calulated using significant serial correlation coefficients.
 }
 \details{
-Trend free time series is constructed by calculating Sen's slope and Auto Correlation coefficient AR(1). Variance correction approach proposed by Hamed and Rao (1998) uses only significant values from all the available values of Auto-Correlation Coefficients. As suggested by Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003), only first three Auto-Correlation coefficients are used.
+Trend free time series is constructed by calculating Sen's slope and Auto Correlation coefficient AR(1). Variance correction approach proposed by Hamed and Rao (1998) uses only significant values from all the available values of Auto-Correlation Coefficients. As suggested by Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003), only first three Auto-Correlation coefficients are used in this function.
 }
 \examples{
 x<-c(Nile)
