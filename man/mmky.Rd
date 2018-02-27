@@ -10,19 +10,23 @@ mmky(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Zc  - Z-Statistic after variance Correction
+Corrected Zc  - Z-Statistic after variance Correction
 
 new P.value  - P-Value after variance correction
 
 N/N*  - Effective sample size
 
-Z  - Original Mann-Kendall Z-Statistic
+Original Z  - Original Mann-Kendall Z-Statistic
 
-P-value  - Original Mann-Kendall P-Value
+Old P-value  - Original Mann-Kendall P-Value
 
 Tau  - Mann-Kendall's Tau
 
 Sen's Slope  - Sen's slope
+
+old.variance - Old variance before variance Correction
+
+new.variance - Variance after correction
 }
 \description{
 Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Yue and Wang (2004) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calculated using significant serial correlation coefficients.

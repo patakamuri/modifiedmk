@@ -12,19 +12,23 @@ mmkh(x,ci=0.95)
 \item{ci}{- Confidence Interval}
 }
 \value{
-Zc  - Z-Statistic after variance Correction
+Corrected Zc  - Z-Statistic after variance Correction
 
 new P.value  - P-Value after variance correction
 
 N/N*  - Effective sample size
 
-Z  - Original Mann-Kendall Z-Statistic
+Original Z  - Original Mann-Kendall Z-Statistic
 
-P-value  - Original Mann-Kendall P-Value
+Old P-value  - Original Mann-Kendall P-Value
 
 Tau  - Mann-Kendall's Tau
 
 Sen's Slope  - Sen's slope
+
+old.variance - Old variance before variance Correction
+
+new.variance - Variance after correction
 }
 \description{
 Time series data is often influenced by sub-sequent observations. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction studies. Hamed and Rao (1998) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calulated using significant serial correlation coefficients.

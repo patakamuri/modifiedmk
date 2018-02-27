@@ -1,8 +1,8 @@
 Package: modifiedmk
 Title: Modified Mann Kendall Trend Tests 
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre"))
-Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series may be modified by the following approaches namely Prewhitening (PW), Trend Free Prewhitening (TFPW) and Modified Mann-Kendall tests through variance correction approaches, by calculating effective sample size.
+Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series may be modified by the following approaches namely Prewhitening (PW), Trend Free Prewhitening (TFPW) and Modified Mann-Kendall tests through variance correction approach by calculating effective sample size.
     Yue, S., & Wang, C. Y. (2002) <doi:10.1029/2001WR000861>.
     Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002) <doi:10.1002/hyp.1095>.
     Hamed, K. H., & Ramachandra Rao, A. (1998) <doi:10.1016/S0022-1694(97)00125-X>.
@@ -13,6 +13,5 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-Suggests: trend, testthat, knitr, rmarkdown,
-    covr
+Suggests: trend, testthat, knitr, rmarkdown,covr
 

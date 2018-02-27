@@ -6,21 +6,23 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Zc  - Z-Statistic after variance Correction
+#' @return  Corrected Zc  - Z-Statistic after variance Correction
 #'
 #' new P.value  - P-Value after variance correction
 #'
 #' N/N*  - Effective sample size
 #'
-#' Z  - Original Mann-Kendall Z-Statistic
+#' Original Z  - Original Mann-Kendall Z-Statistic
 #'
-#' P-value  - Original Mann-Kendall P-Value
+#' Old P-value  - Original Mann-Kendall P-Value
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
 #' Sen's Slope  - Sen's slope
 #'
-#' @export
+#' old.variance - Old variance before variance Correction
+#'
+#' new.variance - Variance after correction
 #'
 #' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. http://doi.org/10.1017/CBO9781107415324.004
 #'
@@ -166,6 +168,14 @@ mmky <-function(x) {
 
 
 
-  return(c("Corrected Zc" = z, "new P-value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
+  return(c("Corrected Zc" = z,
+           "new P-value" = pval,
+           "N/N*" = essf,
+           "Original Z" = z0,
+           "old P.value" = pval0,
+           "Tau" = Tau,
+           "Sen's slope" = slp,
+           "old.variance"=var.S,
+           "new.variance"= VS))
 }
 

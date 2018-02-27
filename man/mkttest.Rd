@@ -23,7 +23,7 @@ P-value  - Mann-Kendall P-Value
 Tau  - Mann-Kendall's Tau
 }
 \description{
-Mann-Kendall trend test is a non-parametric trend test used to identify the monotonic trends present in time series data.
+Mann-Kendall trend test is a non-parametric trend test used to identify monotonic trends present in time series data.
 }
 \details{
 Mann-Kendall trend test is a non-parametric trend tests which assuems no distribution of the data. Null hypothesis of the test is that there is no trend in the data and the alternate hypothesis is that the data represents a monotonic trend.

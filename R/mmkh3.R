@@ -10,20 +10,23 @@
 #'
 #' @param  ci - Confidence Interval
 #'
-#' @return  Zc  - Z-Statistic after variance Correction
+#' @return  Corrected Zc  - Z-Statistic after variance Correction
 #'
 #' new P.value  - P-Value after variance correction
 #'
 #' N/N*  - Effective sample size
 #'
-#' Z  - Original Mann-Kendall Z-Statistic
+#' Original Z  - Original Mann-Kendall Z-Statistic
 #'
-#' P-value  - Original Mann-Kendall P-Value
+#' Old P-value  - Original Mann-Kendall P-Value
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
 #' Sen's Slope  - Sen's slope
 #'
+#' old.variance - Old variance before variance Correction
+#'
+#' new.variance - Variance after correction
 #'
 #' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. http://doi.org/10.1017/CBO9781107415324.004
 #'
@@ -37,7 +40,7 @@
 #'
 #' @references Salas, J.D., 1980. Applied modeling of hydrologic times series. Water Resources Publication.
 #'
-#' @details Trend free time series is constructed by calculating Sen's slope and Auto Correlation coefficient AR(1). Variance correction approach proposed by Hamed and Rao (1998) uses only significant values from all the available values of Auto-Correlation Coefficients. As suggested by Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003), only first three Auto-Correlation coefficients are used.
+#' @details Trend free time series is constructed by calculating Sen's slope and Auto Correlation coefficient AR(1). Variance correction approach proposed by Hamed and Rao (1998) uses only significant values from all the available values of Auto-Correlation Coefficients. As suggested by Rao, A. R., Hamed, K. H., & Chen, H.-L. (2003), only first three Auto-Correlation coefficients are used in this function.
 #'
 #' @examples x<-c(Nile)
 #' mmkh3lag(x)
@@ -189,6 +192,14 @@ mmkh3lag <-function(x, ci=0.95) {
   }
   median(V,na.rm=TRUE)->slp
 
-  return(c("Corrected Zc" = z, "new P-value" = pval,"Original Z" = z0, "old P.value" = pval0,"N/N*" = essf,"old.variance"=var.S, "new.variance"= VS))
-}
 
+  return(c("Corrected Zc" = z,
+           "new P-value" = pval,
+           "N/N*" = essf,
+           "Original Z" = z0,
+           "old P.value" = pval0,
+           "Tau" = Tau,
+           "Sen's slope" = slp,
+           "old.variance"=var.S,
+           "new.variance"= VS))
+}

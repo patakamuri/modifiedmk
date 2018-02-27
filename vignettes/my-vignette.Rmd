@@ -1,3 +1,5 @@
+
+
 xxxx---
 title: "Modified Mann Kendall Trend Tests"
 author: "Sandeep Kumar Patakamuri"
@@ -9,7 +11,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-    In a time series data, the observations at a given time may be influenced by observations in it's past time. This type of data is said to be serially correlated. Trend detection studies will give erraneous results if the serial correlation issue is not addressed.
+    In a time series data, if the observations at a given time is influenced by its previous observations, then the data is said to be serially correlated .  Trend detection studies will give erraneous results if the serial correlation issue is not addressed.
     Auto correlation in a data can be tested by using acf() function available in 'stats' package available with R. When serial correlation is detected in the data, it is suggested to use variance correction approach and apply modified versions of Mann Kendall test suggested by Hamed and Rao (1998) and Yue and Wang (2004).
 
 

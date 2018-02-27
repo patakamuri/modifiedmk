@@ -1,6 +1,6 @@
 #' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pion (2002) Approach.
 #'
-#' @description When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
+#' @description When the time series data is not random and influenced by auto-correlation, trend component is removed from the data and is Pre-Whitened prior to application of trend test in TFPW approach.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
@@ -8,13 +8,13 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Z-Value  - Z-Statistic after variance Correction
+#' @return  Z-Value  - Z-Statistic after Trend-Free Prewhitening
 #'
 #' Sen's Slope  - Sen's slope for TFPW series
 #'
 #' old. Sen's Slope  - Sen's slope for Original data series 'x'
 #'
-#' P-value  - P-Value after variance correction
+#' P-value  - P-Value after Trend-Free Prewhitening
 #'
 #' S  - Mann-Kendall 'S'- statistic
 #'
@@ -159,5 +159,11 @@ tfpwmk <-function(x) {
   }
   median(W,na.rm=TRUE)->slp1
 
-  return(c("Z-Value" = z,"Sen's Slope"= slp1, "old. Sen's Slope"= slp, "P-value" = pval,"S" = S, "Var(S)" = var.S,  "Tau"=Tau))
+  return(c("Z-Value" = z,
+           "Sen's Slope"= slp1,
+           "old. Sen's Slope"= slp,
+           "P-value" = pval,
+           "S" = S,
+           "Var(S)" = var.S,
+           "Tau"=Tau))
 }
