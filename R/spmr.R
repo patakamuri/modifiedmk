@@ -8,7 +8,7 @@
 #'
 #' @return  Correlation coefficient - Spearman's Correlation coefficient value
 #'
-#' @return  Test Statistics - Z-Transform value to test significance (Rho*(sqrt(n-1)))
+#' @return Z-Tranformed Test Statistic value - Z-Transform value to test significance (Rho*(sqrt(n-1)))
 #'
 #' @export
 #'
@@ -56,5 +56,5 @@ spear<-function(x){
   tsrc<-rhos*sqrt(length(x))
 
   return(c("Correlation coefficient" = rhos,
-           "Test Statistics" = tsrc))
+           "Z-tranformed Test Statistic value" = tsrc))
 }
