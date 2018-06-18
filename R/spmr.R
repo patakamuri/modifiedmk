@@ -57,4 +57,5 @@ spear<-function(x){
 
   return(c("Correlation coefficient" = rhos,
            "Z-tranformed Test Statistic value" = tsrc))
-}
+
+  }
