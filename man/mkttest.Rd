@@ -10,7 +10,7 @@ mkttest(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z  - Mann- Kendall Z-statistic after variance Correction
+Z  - Mann- Kendall Z-statistic
 
 sen's slope  - sen's slope
 

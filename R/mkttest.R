@@ -8,7 +8,7 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Z  - Mann- Kendall Z-statistic after variance Correction
+#' @return  Z  - Mann- Kendall Z-statistic
 #'
 #' sen's slope  - sen's slope
 #'
@@ -86,7 +86,7 @@ mkttest <-function(x) {
     }
   }
 
-  # Calculating Z-Statistic values before and after Variance coorection
+  # Calculating Z-Statistic values
 
   if (S == 0) {
     z = 0
@@ -97,7 +97,7 @@ mkttest <-function(x) {
     z = (S+1)/sqrt(var.S)
   }
 
-  # Calculating P-Value before and after Variance coorection
+  # Calculating P-Value
 
   pval = 2*pnorm(-abs(z))
 

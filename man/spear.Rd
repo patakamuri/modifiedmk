@@ -12,7 +12,7 @@ spear(x)
 \value{
 Correlation coefficient - Spearman's Correlation coefficient value
 
-Test Statistics - Z-Transform value to test significance (Rho*(sqrt(n-1)))
+Z-Tranformed Test Statistic value - Z-Transform value to test significance (Rho*(sqrt(n-1)))
 }
 \description{
 Spearman's Rank Correlation test by Sneyers (1990) is an useful in detecting trends.
