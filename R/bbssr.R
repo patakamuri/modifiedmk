@@ -28,9 +28,9 @@
 #'
 #' @references Khaliq, M. N., Ouarda, T. B. M. J., Gachon, P., Sushama, L., and St-Hilaire, A. (2009). Identification of hydrological trends in the presence of serial and cross correlations: A review of selected methods and their application to annual flow regimes of Canadian rivers. Journal of Hydrology, 368: 117-130.
 #'
-#' @references Kundzewicz, Z. W. and Robson, A. J. (2000). Detecting Trend and Other Changes in Meteorological Data. World Climate Program ? Data and Monitoring. World Meteorological Organization, Geneva  (WMO/TD-No. 1013).
+#' @references Kundzewicz, Z. W. and Robson, A. J. (2000). Detecting Trend and Other Changes in Hydrological Data. World Climate Program-Water, Data and Monitoring. World Meteorological Organization, Geneva  (WMO/TD-No. 1013).
 #'
-#' @references Kundzewicz, Z. W. and Robson, A. J. (2004). Change detection in hydrological records ? a review of the methodology. Hydrological Sciences Journal, 49(1): 7-19.
+#' @references Kundzewicz, Z. W. and Robson, A. J. (2004). Change detection in hydrological records-A review of the methodology. Hydrological Sciences Journal, 49(1): 7-19.
 #'
 #' @references Lehmann, E. L. (1975). Nonparametrics: statistical methods based on ranks. Holden-Day, Inc., California, 457 pp.
 #'

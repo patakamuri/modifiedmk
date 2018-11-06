@@ -2,7 +2,7 @@
 % Please edit documentation in R/pwmk.R
 \name{pwmk}
 \alias{pwmk}
-\title{Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Wang (2002) Approach.}
+\title{Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using von Storch, H. (1995) Approach.}
 \usage{
 pwmk(x)
 }
@@ -36,13 +36,15 @@ pwmk(x)
 
 }
 \references{
-Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>
+Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
 
 Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
 
-Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>
+von Storch, H. , Navarra, A. (1995). Misuses of Statistical Analysis in Climate Research. in Analysis of Climate Variability-Applications of Statistical Techniques:11–26. <doi:10.1007/978-3-662-03167-4>.
 
-Yue, S., & Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), 4-1-4–7. <doi:10.1029/2001WR000861>
+Kulkarni A, Storch H Von. (1995). Monte Carlo experiments on the effect of serial correlation on the Mann-Kendall test of trend. Meteorol Zeitschrift,4(JANUARY):82-85.
+
+Yue, S., & Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), 4-1-4–7. <doi:10.1029/2001WR000861>.
 
 Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
 }

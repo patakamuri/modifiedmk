@@ -2,6 +2,7 @@
 
 export(bbsmK)
 export(bbssr)
+export(bcpw)
 export(mkttest)
 export(mmkh)
 export(mmkh3lag)
@@ -16,3 +17,5 @@ importFrom(stats,acf)
 importFrom(stats,median)
 importFrom(stats,pnorm)
 importFrom(stats,qnorm)
+importFrom(utils,head)
+importFrom(utils,tail)

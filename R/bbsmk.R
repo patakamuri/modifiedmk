@@ -34,11 +34,11 @@
 #'
 #' @references Khaliq, M. N., Ouarda, T. B. M. J., Gachon, P., Sushama, L., and St-Hilaire, A. (2009). Identification of hydrological trends in the presence of serial and cross correlations: A review of selected methods and their application to annual flow regimes of Canadian rivers. Journal of Hydrology, 368: 117-130.
 #'
-#' @references Kundzewicz, Z. W. and Robson, A. J. (2000). Detecting Trend and Other Changes in Meteorological Data. World Climate Program ? Data and Monitoring. World Meteorological Organization, Geneva  (WMO/TD-No. 1013).
+#' @references Kundzewicz, Z. W. and Robson, A. J. (2000). Detecting Trend and Other Changes in Hydrological Data. World Climate Program-Data and Monitoring. World Meteorological Organization, Geneva  (WMO/TD-No. 1013).
 #'
-#' @references Kundzewicz, Z. W. and Robson, A. J. (2004). Change detection in hydrological records ? a review of the methodology. Hydrological Sciences Journal, 49(1): 7-19.
+#' @references Kundzewicz, Z. W. and Robson, A. J. (2004). Change detection in hydrological records-A review of the methodology. Hydrological Sciences Journal, 49(1): 7-19.
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245?259. <doi:10.1017/CBO9781107415324.004>
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245-259. <doi:10.1017/CBO9781107415324.004>
 #'
 #' @references Önöz , B. and Bayazit M. (2012). Block bootstrap for Mann-Kendall trend test of serially dependent data. Hydrological Processes, 26: 3552-3560.
 #'

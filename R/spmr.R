@@ -12,7 +12,7 @@
 #'
 #' @export
 #'
-#' @references Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218.<doi:10.1023/B:WARM.0000043140.61082.60>.
+#' @references Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
 #'
 #' @examples x<-c(Nile)
 #' spear(x)

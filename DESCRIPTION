@@ -1,13 +1,17 @@
 Package: modifiedmk
-Title: Modified Mann Kendall Trend Tests 
-Version: 1.1.0
-Authors@R: c(person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre")),person("Nicole", "O'Brien", email = "nobrien@uwaterloo.ca", role = "ctb"))
-Description: Power of non-parametric Mann-Kendall test is highly influenced by serially correlated data. To address this issue, original time-series may be modified by the following approaches namely Prewhitening (PW), Trend Free Prewhitening (TFPW) and Modified Mann-Kendall tests through variance correction approach by calculating effective sample size.
+Title: Modified versions of Mann Kendall and Spearman's Rho Trend Tests 
+Version: 1.2.0
+Authors@R: c(person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre")),person("Nicole", "O'Brien", email = "nobrien@uwaterloo.ca", role = c("aut", "ctb")))
+Description:  Power of non-parametric Mann-Kendall test and Spearman’s Rho test is highly influenced by serially correlated data. To address this issue, trend tests may applied on the modified versions of the time series data by  Block Bootstrapping (BBS), Prewhitening (PW) , Trend Free Prewhitening (TFPW), Bias Corrected Prewhitening (BCPW), and Variance Correction Approach by calculating effective sample size.
+    Mann, H. B. (1945).<doi:10.1017/CBO9781107415324.004>.
+    Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+    sen, P. K. (1968).<doi:10.2307/2285891>.
+    Önöz, B., & Bayazit, M. (2012) <doi:10.1002/hyp.8438>.
+    Hamed, K. H. (2009).<doi:10.1016/j.jhydrol.2009.01.040>.
     Yue, S., & Wang, C. Y. (2002) <doi:10.1029/2001WR000861>.
     Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002) <doi:10.1002/hyp.1095>.
     Hamed, K. H., & Ramachandra Rao, A. (1998) <doi:10.1016/S0022-1694(97)00125-X>.
     Yue, S., & Wang, C. Y. (2004) <doi:10.1023/B:WARM.0000043140.61082.60>.
-    Önöz, B., & Bayazit, M. (2012) <doi:10.1002/hyp.8438>.
 Depends: R (>= 3.0.0)
 Imports: boot
 License: AGPL-3
@@ -15,5 +19,5 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-Suggests: trend, testthat, knitr, rmarkdown,covr
+Suggests: testthat, knitr, rmarkdown,covr
 

@@ -1,4 +1,4 @@
-#' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pion (2002) Approach.
+#' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pilon (2002) Approach.
 #'
 #' @description When the time series data is not random and influenced by auto-correlation, trend component is removed from the data and is Pre-Whitened prior to application of trend test in TFPW approach.
 #'
@@ -22,11 +22,16 @@
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>
+#'
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+#'
+#' @references von Storch, H. , Navarra, A. (1995). Misuses of Statistical Analysis in Climate Research. in Analysis of Climate Variability-Applications of Statistical Techniques:11–26.< doi:10.1007/978-3-662-03167-4>.
+#'
+#' @references Kulkarni A, Storch H Von. (1995). Monte Carlo experiments on the effect of serial correlation on the Mann-Kendall test of trend. Meteorol Zeitschrift,4(JANUARY):82-85.
 #'
 #' @references Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
 #'
-#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>
+#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
 #'
 #' @references Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9), 1807–1829. <doi:10.1002/hyp.1095>.
 #'

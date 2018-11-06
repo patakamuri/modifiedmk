@@ -21,11 +21,11 @@
 #' Tau  - Mann-Kendall's Tau
 #'
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
 #'
 #' @references Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
 #'
-#' @references sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324), 1379. <doi:10.2307/2285891>
+#' @references sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
 #'
 #' @details Mann-Kendall trend test is a non-parametric trend tests which assuems no distribution of the data. Null hypothesis of the test is that there is no trend in the data and the alternate hypothesis is that the data represents a monotonic trend.
 #'
