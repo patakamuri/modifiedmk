@@ -1,4 +1,5 @@
 # modifiedmk
+
 The package is useful in implementing Non-parametric Mann-Kendall trend tests.
 
 The package contains the following varians of Trend-Tests
