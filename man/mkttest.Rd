@@ -2,7 +2,7 @@
 % Please edit documentation in R/mkttest.R
 \name{mkttest}
 \alias{mkttest}
-\title{Mann-Kendall Trend Test of Time series Data with out any modifications}
+\title{Mann-Kendall Trend Test of Time Series Data Without Modifications}
 \usage{
 mkttest(x)
 }
@@ -10,23 +10,23 @@ mkttest(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z  - Mann- Kendall Z-statistic
+Z  - Mann-Kendall Z statistic
 
-sen's slope  - sen's slope
+Sen's slope  - Sen's slope
 
-s  - Mann-Kendall 's'- statistic
+S  - Mann-Kendall S statistic
 
-Var(s) - Variance of 's'
+Var(s) - Variance of S
 
-P-value  - Mann-Kendall P-Value
+P-value  - Mann-Kendall p-value
 
 Tau  - Mann-Kendall's Tau
 }
 \description{
-Mann-Kendall trend test is a non-parametric trend test used to identify monotonic trends present in time series data.
+The Mann-Kendall trend test is a nonparametric trend test used to identify monotonic trends present in time series data.
 }
 \details{
-Mann-Kendall trend test is a non-parametric trend tests which assuems no distribution of the data. Null hypothesis of the test is that there is no trend in the data and the alternate hypothesis is that the data represents a monotonic trend.
+The Mann-Kendall trend test is a nonparametric trend tests which assumes no distribution of the data. The null hypothesis of the test is that there is no trend in the data and the alternative hypothesis is that the data represents a monotonic trend.
 }
 \examples{
 x<-c(Nile)
@@ -34,9 +34,9 @@ mkttest(x)
 
 }
 \references{
-Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 
-Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 
-sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
+Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324): 1379. <doi:10.2307/2285891>
 }

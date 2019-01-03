@@ -12,10 +12,13 @@ spear(x)
 \value{
 Correlation coefficient - Spearman's Correlation coefficient value
 
-Z-Tranformed Test Statistic value - Z-Transform value to test significance (Rho*(sqrt(n-1)))
+Z-Tranformed Test Statistic value - Z-transform value to test significance \eqn{\rho(\sqrt{n-1})}
 }
 \description{
-Spearman's Rank Correlation test by Sneyers (1990) is an useful in detecting trends.
+Spearman's Rank Correlation test by Lehmann (1975) and Sneyers (1990) is useful in detecting trends.
+}
+\details{
+Spearman's Rank Correlation test by Lehmann (1975) and Sneyers (1990) is implemeted in this function.
 }
 \examples{
 x<-c(Nile)
@@ -23,5 +26,7 @@ spear(x)
 
 }
 \references{
-Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
+Lehmann, E. L. (1975). Nonparametrics: statistical methods based on ranks. Holden-Day, Inc., California, 457 pp.
+
+Sneyers, R. (1990). On the statistical analysis of series of observations. World Meteorological Organization, Technical Note no. 143, WMO no. 415, 192 pp.
 }

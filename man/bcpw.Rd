@@ -25,7 +25,7 @@ Var(s) - Variance of 'S'
 Tau - Mann-Kendall's Tau
 }
 \description{
-Hamed (2009) proposed a prewhitening technique in which the slope and lag-1 serial correltaion coefficient are simultaneously estimated.  The lag-1 serial correltaion coefficient is then corrected for bias before prewhitening.
+Hamed (2009) proposed a prewhitening technique in which the slope and lag-1 serial correltaion coefficient are simultaneously estimated.  The lag-1 serial correlation coefficient is then corrected for bias before prewhitening.
 }
 \details{
 Employs ordinary least squares (OLS) to simultaneously estimate the lag-1 serial correlation coefficient and slope of trend.  The lag-1 serial correlation coefficient is then bias corrected.

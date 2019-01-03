@@ -1,20 +1,20 @@
-#' @title Modified Mann-Kendall Test For Serially Correlated Data Using Yue and Wang (2004) Variance Correction Approach.
+#' @title Modified Mann-Kendall Test For Serially Correlated Data Using the Yue and Wang (2004) Variance Correction Approach
 #'
-#' @description Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Yue and Wang (2004) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calculated using significant serial correlation coefficients.
+#' @description Time series data is often influenced by serial correlation. When data are not random and influenced by autocorrelation, modified Mann-Kendall tests may be used for trend detction. Yue and Wang (2004) have proposed variance correction approach to address the issue of serial correlation in trend analysis. Data are initially detrended and the effective sample size is calculated using significant serial correlation coefficients.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Corrected Zc  - Z-Statistic after variance Correction
+#' @return  Corrected Zc  - Z statistic after variance Correction
 #'
-#' new P.value  - P-Value after variance correction
+#' new P.value  - P-value after variance correction
 #'
 #' N/N*  - Effective sample size
 #'
-#' Original Z  - Original Mann-Kendall Z-Statistic
+#' Original Z  - Original Mann-Kendall Z statistic
 #'
-#' Old P-value  - Original Mann-Kendall P-Value
+#' Old P-value  - Original Mann-Kendall p-value
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
@@ -24,13 +24,15 @@
 #'
 #' new.variance - Variance after correction
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+#' @references Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 #'
-#' @references Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 #'
-#' @references sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
+#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324): 1379. <doi:10.2307/2285891>
 #'
-#' @references Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
+#' @references Yue, S. and Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3): 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>
+#'
+#' @details The variance correction approach suggested by Yue and Wang (2004) is implemeted in this function. Serial correlation coefficients for all lags are used in calculating the effective sample size.
 #'
 #' @examples x<-c(Nile)
 #' mmky(x)
@@ -38,20 +40,19 @@
 #' @export
 #'
 mmky <-function(x) {
+  # Initialize the test parameters
 
-  # Initialize the test Parameters
-
-  # Time-Series Vector
+  # Time series Vector
   x = x
-  # Modified Z-Statistic after Variance Correction as per Yue and Wang (2004)) method
+  # Modified Z statistic after variance correction as per Yue and Wang (2004) method
   z = NULL
-  # Original Z-Statistic for Mann-Kendall test before variance correction
+  # Original Z statistic for Mann-Kendall test before variance correction
   z0 = NULL
-  # Modified Z-Statistic after Variance Correction as per Yue and Wang (2004) method
+  # Modified Z statistic after variance correction as per Yue and Wang (2004) method
   pval = NULL
-  # Original P-Value for Mann-Kendall test before variance correction
+  # Original p-value for Mann-Kendall test before variance correction
   pval0 = NULL
-  # Initialize Mann-Kendall 'S'- Statistic
+  # Initialize Mann-Kendall S statistic
   S = 0
   # Initialize Mann-Kendall Tau
   Tau = NULL
@@ -71,9 +72,15 @@ mmky <-function(x) {
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
 
+  n <- length(x)
+  
+  #Specify minimum input vector length
+  if (n < 3) {
+    stop("Input vector must contain at least three values")
+  }
+  
   # Calculating Sen's slope
 
-  n <- length(x)
   rep(NA, n * (n - 1)/2) -> V
   k = 0
   for (i in 1:(n-1)) {
@@ -84,12 +91,12 @@ mmky <-function(x) {
   }
   median(V,na.rm=TRUE)->slp
 
-  # Calculating Trend-Free Series
+  # Calculating trend-free series
 
   t=1:length(x)
   xn=(x[1:n])-((slp)*(t))
 
-  # Calculating Mann-Kendall 'S'- Statistic
+  # Calculating Mann-Kendall S statistic
 
   for (i in 1:(n-1)) {
     for (j in (i+1):n) {
@@ -97,13 +104,13 @@ mmky <-function(x) {
     }
   }
 
-  # Calculating auto-correlation function of the observations (ro)
+  # Calculating autocorrelation function of the observations (ro)
 
-   #lag.max can be edited to include more number of lags
+  #lag.max can be edited to include greater numbers of lags
 
   acf(xn, lag.max=(n-1), plot=FALSE)$acf[-1] -> ro
 
-  # Calculating significant auto-correlation at given confidance interval (rof)
+  # Calculating significant autocorrelation at given confidance interval (rof)
 
 
   rep(NA,length(ro)) -> rof
@@ -119,13 +126,11 @@ mmky <-function(x) {
     ess=ess+(1-(k/n))*rof[k]
     }
 
-
-
   # Calculating variance correction factor (n/n*) as per Yue and Wang (2004)
 
   essf = 1 + 2*(ess)
 
-  # Calculating Mann-Kendall Variance before correction (Var(s))
+  # Calculating Mann-Kendall variance before correction (Var(s))
 
   var.S = n*(n-1)*(2*n+5)*(1/18);
   if(length(unique(x)) < n) {
@@ -138,11 +143,11 @@ mmky <-function(x) {
     }
   }
 
-  # Calculating new variance  Var(s)*=(Var(s))*(n/n*)  as per Yue and Wang (2004)
+  # Calculating new variance  Var(s)*=(Var(s))*(n/n*) as per Yue and Wang (2004)
 
   VS = var.S * essf
 
-  # Calculating Z-Statistic values before and after Variance coorection
+  # Calculating Z statistic values before and after variance correction
 
   if (S == 0) {
     z = 0
@@ -156,18 +161,16 @@ mmky <-function(x) {
     z0 = (S+1)/sqrt(var.S)
   }
 
-  # Calculating P-Value before and after Variance coorection
+  # Calculating p-value before and after variance corection
 
   pval = 2*pnorm(-abs(z))
   pval0 = 2*pnorm(-abs(z0))
 
-  # Calculating kendall's Tau
+  # Calculating Kendall's Tau
 
   Tau = S/(.5*n*(n-1))
 
   # Listing all outputs
-
-
 
   return(c("Corrected Zc" = z,
            "new P-value" = pval,

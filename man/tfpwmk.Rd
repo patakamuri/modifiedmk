@@ -2,7 +2,7 @@
 % Please edit documentation in R/tfpwmk.R
 \name{tfpwmk}
 \alias{tfpwmk}
-\title{Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pilon (2002) Approach.}
+\title{Mann-Kendall Trend Test Applied to Trend-Free Prewhitened Time Series Data in Presence of Serial Correlation Using Yue et al. (2002) Approach}
 \usage{
 tfpwmk(x)
 }
@@ -10,25 +10,25 @@ tfpwmk(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z-Value  - Z-Statistic after Trend-Free Prewhitening
+Z-Value  - Z statistic after trend-free prewhitening (TFPW)
 
 Sen's Slope  - Sen's slope for TFPW series
 
-old. Sen's Slope  - Sen's slope for Original data series 'x'
+Old Sen's Slope  - Sen's slope for original data series (x)
 
-P-value  - P-Value after Trend-Free Prewhitening
+P-value  - P-value after trend-free prewhitening
 
-S  - Mann-Kendall 'S'- statistic
+S  - Mann-Kendall S statistic
 
-Var(s) - Variance of 's'
+Var(s) - Variance of S
 
 Tau  - Mann-Kendall's Tau
 }
 \description{
-When the time series data is not random and influenced by auto-correlation, trend component is removed from the data and is Pre-Whitened prior to application of trend test in TFPW approach.
+When the time series data are not random and influenced by autocorrelation, the trend component is removed from the data and is prewhitened prior to the application of the trend test.
 }
 \details{
-Trend component is removed from the original data and sujected to Pre-Whitening by calculating lag-1 serial correlation coefficient. The data thus generated is tested with Mann-Kendall trend test.
+The linear trend component is removed from the original data and then prewhitened using the lag-1 serial correlation coefficient. The prewhitening data are then tested with Mann-Kendall trend test.
 }
 \examples{
 x<-c(Nile)
@@ -36,17 +36,17 @@ tfpwmk(x)
 
 }
 \references{
-Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 
-von Storch, H. , Navarra, A. (1995). Misuses of Statistical Analysis in Climate Research. in Analysis of Climate Variability-Applications of Statistical Techniques:11–26.< doi:10.1007/978-3-662-03167-4>.
+Kulkarni, A. and H. von Storch. 1995. Monte carlo experiments on the effects of serial correlation on the MannKendall test of trends. Meteorologische Zeitschrift N.F, 4(2): 82-85.
 
-Kulkarni A, Storch H Von. (1995). Monte Carlo experiments on the effect of serial correlation on the Mann-Kendall test of trend. Meteorol Zeitschrift,4(JANUARY):82-85.
+Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 
-Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+Salas, J.D. (1980). Applied modeling of hydrologic times series. Water Resources Publication, 484 pp.
 
-Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
+Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324): 1379. <doi:10.2307/2285891>
 
-Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9), 1807–1829. <doi:10.1002/hyp.1095>.
+von Storch, V. H. (1995). Misuses of statistical analysis in climate research, In: Analysis of Climate Variability: Applications of Statistical Techniques, ed. von H. V. Storch and A. Navarra A. Springer-Verlag, Berlin: 11-26.
 
-Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
+Yue, S., Pilon, P., Phinney, B., and Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9): 1807–1829. <doi:10.1002/hyp.1095>
 }

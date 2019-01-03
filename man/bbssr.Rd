@@ -2,38 +2,36 @@
 % Please edit documentation in R/bbssr.R
 \name{bbssr}
 \alias{bbssr}
-\title{Block bootstrapped Spearman's Rank Correlation Trend Test}
+\title{Nonparametric Block Bootstrapped Spearman's Rank Correlation Trend Test}
 \usage{
-bbssr(x, ci = 0.95, nsim = 2000, eta = 1, bl.len = NULL)
+bbssr(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
 }
 \arguments{
 \item{x}{- Time series data vector}
 
-\item{ci}{- Confidence Interval}
+\item{ci}{- Confidence interval}
 
-\item{nsim}{- Number of simulations}
+\item{nsim}{- Number of bootstrapped simulations}
 
 \item{eta}{- Added to the block length}
 
 \item{bl.len}{- Block length}
 }
 \value{
-SR.orig- Spearman's Correlation Coefficient
+Spearman's Correlation Coefficient - Spearman's correlation coefficient value
 
-SRtsrc- Test Statistic
+Test Statistic - Z-transformed value to test significance \eqn{\rho(\sqrt{n-1})}
 
-lb- Lower bound of confidence interval value
-
-ub- Upper bound of confidence interval value
+Test Statistic Empirical Bootstrapped CI - Test statistic empirical bootstrapped confidence interval
 }
 \description{
-Significant serial correlation present in time series data can be accounted for using the nonparametric block bootstrap technique, which incorporates the Mann-Kendall trend test (Kundzewicz and Robson, 2000).  Predetermined block lengths are used in resampling the original time series, thus retaining the memory structure of the data.  If the value of the test statistic falls in the tails of the empirical bootstrapped distribution, there is likely a trend in the data.  The block bootstrap technique is powerful in the presence of auto-correlation (Khaliq et al. 2009; Önöz and Bayazit, 2012).
+Significant serial correlation present in time series data can be accounted for using the nonparametric block bootstrap technique, which incorporates Spearman’s Rank Correlation trend test (Lehmann, 1975; Sneyers, 1990;Kundzewicz and Robson, 2000).  Predetermined block lengths are used in resampling the original time series, thus retaining the memory structure of the data.  If the value of the test statistic falls in the tails of the empirical bootstrapped distribution, there is likely a trend in the data.  The block bootstrap technique is powerful in the presence of autocorrelation (Khaliq et al. 2009; Önöz and Bayazit, 2012).
 }
 \details{
-Block lengths are automatically selected using the lag of the least significance serial correlation, to which the 'eta'  term is added. A value of eta = 1 is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
+Block lengths are the number of contiguous significant serial correlations, to which the (\eqn{\eta}) term is added. A value of \eqn{\eta = 1} is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
 }
 \examples{
-x<-c(Nile)
+x<-c(Nile[1:10])
 bbssr(x)
 
 }

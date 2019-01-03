@@ -2,7 +2,7 @@
 % Please edit documentation in R/pwmk.R
 \name{pwmk}
 \alias{pwmk}
-\title{Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using von Storch, H. (1995) Approach.}
+\title{Mann-Kendall Test of Prewhitened Time Series Data in Presence of Serial Correlation Using the von Storch (1995) Approach}
 \usage{
 pwmk(x)
 }
@@ -10,25 +10,25 @@ pwmk(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Z-Value  - Z-Statistic after Pre-Whitening
+Z-Value  - Z statistic after prewhitening
 
-Sen's Slope  - Sen's slope for Prewhitened series
+Sen's Slope  - Sen's slope for prewhitened series
 
-old. Sen's Slope  - Sen's slope for Original data series 'x'
+old. Sen's Slope  - Sen's slope for original data series (x)
 
-P-value  - P-Value after Pre-Whitening
+P-value  - P-value after prewhitening
 
-S  - Mann-Kendall 'S'- statistic
+S  - Mann-Kendall S statistic
 
-Var(s) - Variance of 's'
+Var(s) - Variance of S
 
 Tau  - Mann-Kendall's Tau
 }
 \description{
-When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
+When time series data are not random and influenced by autocorrelation, prewhitening the time series prior to application of trend test is suggested.
 }
 \details{
-Pre-Whitening involves calculating lag-1 serial correlation coefficient and calculating new-series.
+The lag-1 serial correlation coefficient is used for prewhitening.
 }
 \examples{
 x<-c(Nile)
@@ -36,15 +36,15 @@ pwmk(x)
 
 }
 \references{
-Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 
-Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+Kulkarni, A. and H. von Storch. 1995. Monte carlo experiments on the effects of serial correlation on the MannKendall test of trends. Meteorologische Zeitschrift N.F, 4(2): 82-85.
 
-von Storch, H. , Navarra, A. (1995). Misuses of Statistical Analysis in Climate Research. in Analysis of Climate Variability-Applications of Statistical Techniques:11–26. <doi:10.1007/978-3-662-03167-4>.
+Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 
-Kulkarni A, Storch H Von. (1995). Monte Carlo experiments on the effect of serial correlation on the Mann-Kendall test of trend. Meteorol Zeitschrift,4(JANUARY):82-85.
+Salas, J.D. (1980). Applied modeling of hydrologic times series. Water Resources Publication, 484 pp.
 
-Yue, S., & Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), 4-1-4–7. <doi:10.1029/2001WR000861>.
+von Storch, V. H. (1995). Misuses of statistical analysis in climate research, In: Analysis of Climate Variability: Applications of Statistical Techniques, ed. von H. V. Storch and A. Navarra A. Springer-Verlag, Berlin: 11-26.
 
-Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
+Yue, S. and Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), <doi:10.1029/2001WR000861>
 }

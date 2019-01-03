@@ -2,7 +2,7 @@
 % Please edit documentation in R/mmky1.R
 \name{mmky1lag}
 \alias{mmky1lag}
-\title{Modified Mann-Kendall Test For Serially Correlated Data Using Yue and Wang (2004) Variance Correction Approach Considering Lag-1 Correlation Coefficient.}
+\title{Modified Mann-Kendall Test For Serially Correlated Data Using the Yue and Wang (2004) Variance Correction Approach Using the Lag-1 Correlation Coefficient Only}
 \usage{
 mmky1lag(x)
 }
@@ -10,15 +10,15 @@ mmky1lag(x)
 \item{x}{- Time series data vector}
 }
 \value{
-Corrected Zc  - Z-Statistic after variance Correction
+Corrected Zc  - Z statistic after variance Correction
 
-new P.value  - P-Value after variance correction
+new P.value  - P-value after variance correction
 
 N/N*  - Effective sample size
 
-Original Z  - Original Mann-Kendall Z-Statistic
+Original Z  - Original Mann-Kendall Z statistic
 
-Old P-value  - Original Mann-Kendall P-Value
+Old P-value  - Original Mann-Kendall p-value
 
 Tau  - Mann-Kendall's Tau
 
@@ -29,19 +29,22 @@ old.variance - Old variance before variance Correction
 new.variance - Variance after correction
 }
 \description{
-Time series data is often influenced by serial-correlation. When data is not random and influenced by auto-correlation, Modified Mann-Kendall tests are to be used in trend detction. Yue and Wang (2004) have proposed variance correction approach to address the issue of serial correlation in Trend analysis. Trend is removed from the series and effective sample size is calculated using significant serial correlation coefficients.
+Time series data is often influenced by serial correlation. When data are not random and influenced by autocorrelation, modified Mann-Kendall tests may be used for trend detction. Yue and Wang (2004) have proposed a variance correction approach to address the issue of serial correlation in trend analysis. Data are initially detrended and the effective sample size is calculated using the lag-1 autocorrelation coefficient.
+}
+\details{
+The variance correction approach suggested by Yue and Wang (2004) is implemeted in this function. Effective sample size is calculated based on the AR(1) assumption.
 }
 \examples{
 x<-c(Nile)
-mmky(x)
+mmky1lag(x)
 
 }
 \references{
-Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 
-Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 
-sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
+Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American statistical Association, 63(324): 1379. <doi:10.2307/2285891>
 
-Yue, S., & Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3), 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>.
+Yue, S. and Wang, C. Y. (2004). The Mann-Kendall test modified by effective sample size to detect trend in serially correlated hydrological series. Water Resources Management, 18(3): 201–218. <doi:10.1023/B:WARM.0000043140.61082.60>
 }

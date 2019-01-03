@@ -1,6 +1,6 @@
-#' @title Mann-Kendall Test applied to Trend Free Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Pilon (2002) Approach.
+#' @title Mann-Kendall Trend Test Applied to Trend-Free Prewhitened Time Series Data in Presence of Serial Correlation Using Yue et al. (2002) Approach
 #'
-#' @description When the time series data is not random and influenced by auto-correlation, trend component is removed from the data and is Pre-Whitened prior to application of trend test in TFPW approach.
+#' @description When the time series data are not random and influenced by autocorrelation, the trend component is removed from the data and is prewhitened prior to the application of the trend test.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
@@ -8,36 +8,36 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Z-Value  - Z-Statistic after Trend-Free Prewhitening
+#' @return  Z-Value  - Z statistic after trend-free prewhitening (TFPW)
 #'
 #' Sen's Slope  - Sen's slope for TFPW series
 #'
-#' old. Sen's Slope  - Sen's slope for Original data series 'x'
+#' Old Sen's Slope  - Sen's slope for original data series (x)
 #'
-#' P-value  - P-Value after Trend-Free Prewhitening
+#' P-value  - P-value after trend-free prewhitening
 #'
-#' S  - Mann-Kendall 'S'- statistic
+#' S  - Mann-Kendall S statistic
 #'
-#' Var(s) - Variance of 's'
+#' Var(s) - Variance of S
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>.
+#' @references Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 #'
-#' @references von Storch, H. , Navarra, A. (1995). Misuses of Statistical Analysis in Climate Research. in Analysis of Climate Variability-Applications of Statistical Techniques:11–26.< doi:10.1007/978-3-662-03167-4>.
+#' @references Kulkarni, A. and H. von Storch. 1995. Monte carlo experiments on the effects of serial correlation on the MannKendall test of trends. Meteorologische Zeitschrift N.F, 4(2): 82-85.
 #'
-#' @references Kulkarni A, Storch H Von. (1995). Monte Carlo experiments on the effect of serial correlation on the Mann-Kendall test of trend. Meteorol Zeitschrift,4(JANUARY):82-85.
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 #'
-#' @references Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+#' @references Salas, J.D. (1980). Applied modeling of hydrologic times series. Water Resources Publication, 484 pp.
 #'
-#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>.
+#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324): 1379. <doi:10.2307/2285891>
 #'
-#' @references Yue, S., Pilon, P., Phinney, B., & Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9), 1807–1829. <doi:10.1002/hyp.1095>.
+#' @references von Storch, V. H. (1995). Misuses of statistical analysis in climate research, In: Analysis of Climate Variability: Applications of Statistical Techniques, ed. von H. V. Storch and A. Navarra A. Springer-Verlag, Berlin: 11-26.
 #'
-#' @references Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
+#' @references Yue, S., Pilon, P., Phinney, B., and Cavadias, G. (2002). The influence of autocorrelation on the ability to detect trend in hydrological series. Hydrological Processes, 16(9): 1807–1829. <doi:10.1002/hyp.1095>
 #'
-#' @details Trend component is removed from the original data and sujected to Pre-Whitening by calculating lag-1 serial correlation coefficient. The data thus generated is tested with Mann-Kendall trend test.
+#' @details The linear trend component is removed from the original data and then prewhitened using the lag-1 serial correlation coefficient. The prewhitening data are then tested with Mann-Kendall trend test.
 #'
 #' @examples x<-c(Nile)
 #' tfpwmk(x)
@@ -45,16 +45,15 @@
 #' @export
 #'
 tfpwmk <-function(x) {
+  # Initialize the test parameters
 
-  # Initialize the test Parameters
-
-  # Time-Series Vector
+  # Time series vector
   x = x
-  # Modified Z-Statistic after Pre-Whitening
+  # Modified Z statistic after prewhitening
   z = NULL
-  # Modified P-value after Pre-Whitening
+  # Modified p-value after prewhitening
   pval = NULL
-  # Initialize Mann-Kendall 'S'- Statistic
+  # Initialize Mann-Kendall S statistic
   S = 0
   # Initialize Mann-Kendall var.S
   var.S = NULL
@@ -74,9 +73,14 @@ tfpwmk <-function(x) {
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
 
-
+  n<-length(x)
+  
+  #Specify minimum input vector length
+  if (n < 3) {
+    stop("Input vector must contain at least three values")
+  }
+  
   # Calculating Sen's slope
-  n <- length(x)
   rep(NA, n * (n - 1)/2) -> V
   k = 0
   for (i in 1:(n-1)) {
@@ -87,12 +91,12 @@ tfpwmk <-function(x) {
   }
   median(V,na.rm=TRUE)->slp
 
-  # Calculating Trend-Free Series (xt)
+  # Calculating trend-free series (xt)
 
   t=1:length(x)
   xt<-(x[1:n])-((slp)*(t))
 
-  # Calculating lag-1 auto-correlation coefficient of Trend-Free Series (ro)
+  # Calculating lag-1 autocorrelation coefficient of trend-free series (ro)
 
   acf(xt, lag.max=1, plot=FALSE)$acf[-1] -> ro
 
@@ -111,7 +115,7 @@ tfpwmk <-function(x) {
 
   n1<-length(y)
 
-  # Calculating Mann-Kendall 'S'- Statistic
+  # Calculating Mann-Kendall S statistic
 
   for (i in 1:(n1-1)) {
     for (j in (i+1):n1) {
@@ -119,7 +123,7 @@ tfpwmk <-function(x) {
     }
   }
 
-  # Calculating Mann-Kendall Variance (Var(s))
+  # Calculating Mann-Kendall variance (Var(s))
 
   var.S = n1*(n1-1)*(2*n1+5)*(1/18)
   if(length(unique(y)) < n1) {
@@ -132,7 +136,7 @@ tfpwmk <-function(x) {
     }
   }
 
-  # Calculating Z-Statistic values before and after Variance coorection
+  # Calculating Z statistic
 
   if (S == 0) {
     z = 0
@@ -143,12 +147,12 @@ tfpwmk <-function(x) {
     z = (S+1)/sqrt(var.S)
   }
 
-  # Calculating P-Value before and after Variance coorection
+  # Calculating p-value
 
   pval = 2*pnorm(-abs(z))
 
 
-  # Calculating kendall's Tau
+  # Calculating Kendall's Tau
 
   Tau = S/(.5*n1*(n1-1))
 
@@ -166,7 +170,7 @@ tfpwmk <-function(x) {
 
   return(c("Z-Value" = z,
            "Sen's Slope"= slp1,
-           "old. Sen's Slope"= slp,
+           "Old Sen's Slope"= slp,
            "P-value" = pval,
            "S" = S,
            "Var(S)" = var.S,
