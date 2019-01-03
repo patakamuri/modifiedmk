@@ -1,6 +1,6 @@
 # modifiedmk
 
-The package is useful in implementing Non-parametric Mann-Kendall trend tests.
+The package is useful in implementing Non-parametric Mann-Kendall trend tests and Spearman's Rank Correlation Coefficient tests.
 
 The package contains the following varians of Trend-Tests
 
@@ -8,7 +8,11 @@ The package contains the following varians of Trend-Tests
 
 - Mann-Kendall trend test for Pre-Whitened series (PW-MK)
 
+- Mann-Kendall trend test for Bias-Corrected Pre-Whitened series (BCPW-MK)
+
 - Mann-Kendall trend test for Trend-Free Pre-Whitened series (TFPW-MK)
+
+- Block Bootstrapping with Mann-Kendall test (BBSMK)
 
 - Modified Mann-Kendall trend using Variance Correction Approach by Hamed and Rao (1998)
 
@@ -19,6 +23,8 @@ The package contains the following varians of Trend-Tests
 - Modified Mann-Kendall trend using Variance Correction Approach suggested by Yue and Wang (2004) considering only lag-1 auto correlation coefficient
 
 - Spearman's Rank Correlation test
+
+- Block Bootstrapping with Spearman's Rank Correlation test (BBSSR)
 
 - Trend magnitude is calculated by Sen's slope method 
 
