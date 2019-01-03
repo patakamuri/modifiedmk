@@ -1,10 +1,10 @@
 Package: modifiedmk
-Title: Modified versions of Mann Kendall and Spearman's Rho Trend Tests 
+Title: Modified Versions of Mann Kendall and Spearman's Rho Trend Tests 
 Version: 1.2.0
 Authors@R: c(person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre")),person("Nicole", "O'Brien", email = "nobrien@uwaterloo.ca", role = c("aut", "ctb")))
-Description:  Power of non-parametric Mann-Kendall test and Spearman’s Rho test is highly influenced by serially correlated data. To address this issue, trend tests may applied on the modified versions of the time series data by  Block Bootstrapping (BBS), Prewhitening (PW) , Trend Free Prewhitening (TFPW), Bias Corrected Prewhitening (BCPW), and Variance Correction Approach by calculating effective sample size.
+Description:  Power of non-parametric Mann-Kendall test and Spearman’s Rho test is highly influenced by serially correlated data. To address this issue, trend tests may applied on the modified versions of the time series data by  Block Bootstrapping (BBS), Prewhitening (PW) , Trend Free Prewhitening (TFPW), Bias Corrected Prewhitening and Variance Correction Approach by calculating effective sample size.
     Mann, H. B. (1945).<doi:10.1017/CBO9781107415324.004>.
-    Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+    Kendall, M. (1975). Multivariate analysis. Charles Griffin&Company Ltd,. 
     sen, P. K. (1968).<doi:10.2307/2285891>.
     Önöz, B., & Bayazit, M. (2012) <doi:10.1002/hyp.8438>.
     Hamed, K. H. (2009).<doi:10.1016/j.jhydrol.2009.01.040>.

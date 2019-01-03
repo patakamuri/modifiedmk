@@ -1,3 +1,9 @@
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
 # modifiedmk
 
 The package is useful in implementing Non-parametric Mann-Kendall trend tests and Spearman's Rank Correlation Coefficient tests.

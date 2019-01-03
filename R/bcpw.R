@@ -156,12 +156,12 @@ bcpw <- function(x) {
   }
   median(W,na.rm=TRUE)->slp1
 
-  cat(paste("Z-Value = ", z,
-            "Prewhitened Sen's Slope = ", slp1,
-            "Sen's Slope = ", slp,
-            "P-value = ", pval,
-            "S = ", S,
-            "Var(S) = ", var.S,
-            "Tau = ", Tau))
+  return(c("Z-Value" =  z,
+            "Prewhitened Sen's Slope" = slp1,
+            "Sen's Slope" = slp,
+            "P-value" = pval,
+            "S" = S,
+            "Var(S)" = var.S,
+            "Tau " = Tau))
 }
 

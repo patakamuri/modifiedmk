@@ -6,6 +6,8 @@
 #'
 #' @importFrom boot tsboot boot.ci
 #'
+#' @usage bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
+#'
 #' @param  x  - Time series data vector
 #'
 #' @param  ci - Confidence Interval
@@ -44,14 +46,14 @@
 #'
 #' @references Svensson, C., Kundzewicz, Z. W., and Maurer, T. (2005). Trend detection in river flow series: 2. Floods and low-flow index series. Hydrological Sciences Journal, 50(5): 811-823.
 #'
-#' @details Block lengths are automatically selected using the lag of the least significance serial correlation, to which the 'eta'  term is added. A value of eta = 1 is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
+#' @details The block bootstrap is used along with the non-parametric Mann-Kendall trend test.  A test statistic falling in the tails of the simulated empirical distribution, the results is likely significant.
 #'
 #' @examples x<-c(Nile)
-#' bbsmK(x)
+#' bbsmk(x)
 #'
 #' @export
 #'
-bbsmK <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
+bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   # Initialize the test Parameters
 
   # Time-Series Vector
@@ -64,7 +66,8 @@ bbsmK <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   eta=eta
   #Initialization of block length
   bl.len=bl.len
-
+  # Mann-Kendall Tau
+  Tau = NULL
   # To test whether the data is in vector format
 
   if (is.vector(x) == FALSE) {
@@ -81,8 +84,8 @@ bbsmK <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   #Specify minimum block length
   if (is.null(bl.len) == FALSE)
     if (bl.len > n) {
-    stop("Block length must be less than the time series length")
-  }
+      stop("Block length must be less than the time series length")
+    }
 
   # To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
   if (any(is.finite(x) == FALSE)) {
@@ -124,23 +127,27 @@ bbsmK <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
 
   }
 
-  #Block bootstrap using Mann Kendall
+    #Block bootstrap using Mann Kendall
 
   MK.orig <- mkttest(x)
-  z<-round(MK.orig["Z-Value"], digits = 7)
+  Z<-round(MK.orig["Z-Value"], digits = 7)
   slp<-round(MK.orig["Sen's slope"], digits = 7)
   S<-MK.orig["S"]
+  Tau <- MK.orig["Tau"]
   MKtau <- function(x) mkttest(x)[["Tau"]]
-  boot.out <- tsboot(x, MKtau, R=nsim, l=bl.len, sim="fixed")
-  Tau <- round(boot.out$t0, digits = 7)
-  bbs.ci <- boot.ci(boot.out, conf = ci, type="basic")$basic[4:5]
-  lb <- round(bbs.ci[1], digits = 7)
-  ub <- round(bbs.ci[2], digits = 7)
+  boot.out.MKtau <- tsboot(x, MKtau, R=nsim, l=bl.len, sim="fixed")
+  MKZ <- function(x) mkttest(x)[[1]]
+  boot.out.Zval <- tsboot(x, MKZ, R=nsim, l=bl.len, sim="fixed")
+  lb.MKtau <- round(sort(boot.out.MKtau$t)[(1-ci)*nsim], digits = 7)
+  ub.MKtau <- round(sort(boot.out.MKtau$t)[ci*nsim], digits = 7)
+  lb.MKZ <- round(sort(boot.out.Zval$t)[(1-ci)*nsim], digits = 7)
+  ub.MKZ <- round(sort(boot.out.Zval$t)[ci*nsim], digits = 7)
 
-  cat(paste("Z-Value = ", z,
+  cat(paste("Z-Value = ", Z,
             "Sen's Slope = ", slp,
             "S = ", S,
             "Kendall's Tau = ", Tau,
-            "Kendall's Tau Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb,ub),sep="\n"),sep="\n")
+            "Kendall's Tau Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKtau,ub.MKtau),
+            "Z-value Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKZ,ub.MKZ),sep="\n"))
 
 }

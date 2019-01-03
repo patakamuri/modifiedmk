@@ -6,6 +6,8 @@
 #'
 #' @importFrom boot tsboot boot.ci
 #'
+#' @usage bbssr(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
+#'
 #' @param  x  - Time series data vector
 #'
 #' @param  ci - Confidence Interval
@@ -77,8 +79,8 @@ bbssr <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   #Specify minimum block length
   if (is.null(bl.len) == FALSE)
     if (bl.len > n) {
-    stop("Block length must be less than the time series length")
-  }
+      stop("Block length must be less than the time series length")
+    }
 
   # To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
   if (any(is.finite(x) == FALSE)) {
@@ -123,14 +125,13 @@ bbssr <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   #Block bootstrap using Spearman's Rank Correlation
 
   SR.orig<-round(spear(x)["Correlation coefficient"], digits = 7)
-  SRfunc <- function(x) spear(x)[["Z-tranformed Test Statistic value"]]
+  Z_trans<-round(spear(x)[2], digits = 7)
+  SRfunc <- function(x) spear(x)[[2]]
   boot.out <- tsboot(x, SRfunc, R=nsim, l=bl.len, sim="fixed")
-  SRtsrc <- round(boot.out$t0, digits = 7)
-  bbs.ci <- boot.ci(boot.out, conf = ci, type="basic")$basic[4:5]
-  lb <- round(bbs.ci[1], digits = 7)
-  ub <- round(bbs.ci[2], digits = 7)
+  lb <- round(sort(boot.out$t)[(1-ci)*nsim], digits = 7)
+  ub <- round(sort(boot.out$t)[ci*nsim], digits = 7)
 
   cat(paste("Spearman's Correlation Coefficient = ", SR.orig,
-            "Test Statistic = ", SRtsrc ,
-            "Test Statistic Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb,ub),sep="\n"),sep="\n")
+            "Z-Transformed Test Statistic = ", Z_trans ,
+            "Z-Transformed Test Statistic Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb,ub),sep="\n"),sep="\n")
 }

@@ -4,7 +4,7 @@
 \alias{bbssr}
 \title{Block bootstrapped Spearman's Rank Correlation Trend Test}
 \usage{
-bbssr(x, ci = 0.95, nsim = 2000, eta = 1, bl.len = NULL)
+bbssr(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
 }
 \arguments{
 \item{x}{- Time series data vector}
