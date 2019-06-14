@@ -8,6 +8,8 @@
 #'
 #' @usage bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
 #'
+#' @usage bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
+#'
 #' @param  x  - Time series data vector
 #'
 #' @param  ci - Confidence interval
@@ -46,15 +48,25 @@
 #'
 #' @references Svensson, C., Kundzewicz, Z. W., and Maurer, T. (2005). Trend detection in river flow series: 2. Floods and low-flow index series. Hydrological Sciences Journal, 50(5): 811-823.
 #'
+<<<<<<< HEAD
 #' @details Block lengths are automatically selected using the number of contiguous significant serial correlations, to which the eta (\eqn{\eta}) term is added. A value of \eqn{\eta = 1} is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
 #'
 #' @examples x<-c(Nile[1:10])
+=======
+#' @details The block bootstrap is used along with the non-parametric Mann-Kendall trend test.  A test statistic falling in the tails of the simulated empirical distribution, the results is likely significant.
+#'
+#' @examples x<-c(Nile)
+>>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 #' bbsmk(x)
 #'
 #' @export
 #'
 bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
+<<<<<<< HEAD
   # Initialize the test parameters
+=======
+  # Initialize the test Parameters
+>>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 
   # Time-series vector
   x = x
@@ -129,7 +141,11 @@ bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
 
   }
 
+<<<<<<< HEAD
   #Block bootstrap using Mann-Kendall
+=======
+    #Block bootstrap using Mann Kendall
+>>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 
   MK.orig <- mkttest(x)
   Z<-round(MK.orig["Z-Value"], digits = 7)
