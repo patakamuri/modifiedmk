@@ -115,16 +115,16 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
 
     #Bootstrapped using Mann-Kendall
     MK.orig <- mkttest(x)
-    Z <- round(MK.orig["Z-Value"], digits = 7)
-    slp <- round(MK.orig["Sen's slope"], digits = 7)
-    Tau <- round(MK.orig["Tau"], digits = 7)
-    S.orig <- MK.orig["S"]
+    Z <- MK.orig[[1]]
+    slp <- MK.orig[[2]]
+    Tau <- MK.orig[[6]]
+    S.orig <- MK.orig[[3]]
     MKpw <- mkttest(xn)
-    Zpw <- round(MKpw["Z-Value"], digits = 7)
-    slpPW <- round(MKpw["Sen's slope"], digits = 7)
-    TauPW <- round(MKpw["Tau"], digits = 7)
-    Spw <- MKpw["S"]
-    MKS <- function(xn) mkttest(xn)[["S"]]
+    Zpw <- MKpw[[1]]
+    slpPW <- MKpw[[2]]
+    TauPW <- MKpw[[6]]
+    Spw <- MKpw[[3]]
+    MKS <- function(xn) mkttest(xn)[[3]]
     boot.out.MKS <- tsboot(xn, MKS, R=nsim, l=1, sim="fixed")
     loc <- suppressWarnings(max(which(sort(boot.out.MKS$t) < Spw)))
     if (loc == -Inf) {
@@ -132,23 +132,23 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     }
     pval <- loc/nsim
 
-    cat(paste("Z Value = ", Z,
-              "Sen's Slope = ", slp,
-              "S = ", S.orig,
-              "Kendall's Tau = ", Tau,
-              "BCP Z Value = ", Zpw,
-              "BCP Sen's Slope = ", slpPW,
-              "BCP S = ", Spw,
-              "BCP Kendall's Tau = ", TauPW,
-              "Bootstrapped P-Value =", pval ,sep="\n"))
+    return(c("Z Value"=Z,
+             "Sen's Slope"=slp,
+             "S"=S.orig,
+             "Kendall's Tau"=Tau,
+             "BCP Z Value"=Zpw,
+             "BCP Sen's Slope"=slpPW,
+             "BCP S"=Spw,
+             "BCP Kendall's Tau"=TauPW,
+             "Bootstrapped P-Value"=pval))
   } else {
     #Bootstrapped using Mann-Kendall
     MK.orig <- mkttest(x)
-    Z <- round(MK.orig["Z-Value"], digits = 7)
-    slp <- round(MK.orig["Sen's slope"], digits = 7)
-    Tau <- round(MK.orig["Tau"], digits = 7)
-    S.orig <- MK.orig["S"]
-    MKS1 <- function(x) mkttest(x)[["S"]]
+    Z <- MK.orig[[1]]
+    slp <- MK.orig[[2]]
+    Tau <- MK.orig[[6]]
+    S.orig <- MK.orig[[3]]
+    MKS1 <- function(x) mkttest(x)[[3]]
     boot.out.MKS1 <- tsboot(x, MKS1, R=nsim, l=1, sim="fixed")
     loc <- suppressWarnings(max(which(sort(boot.out.MKS1$t) < S.orig)))
 
@@ -157,11 +157,11 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     }
     pval <- loc/nsim
 
-    cat(paste("Z Value = ", Z,
-              "Sen's Slope = ", slp,
-              "S = ", S.orig,
-              "Kendall's Tau = ", Tau,
-              "Bootstrapped P-Value =", pval ,sep="\n"))
+    return(c("Z Value"=Z,
+             "Sen's Slope"=slp,
+             "S"=S.orig,
+             "Kendall's Tau"=Tau,
+             "Bootstrapped P-Value"=pval))
   }
 }
 

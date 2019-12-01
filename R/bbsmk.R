@@ -148,11 +148,11 @@ bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
 >>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 
   MK.orig <- mkttest(x)
-  Z<-round(MK.orig["Z-Value"], digits = 7)
-  slp<-round(MK.orig["Sen's slope"], digits = 7)
-  S<-MK.orig["S"]
-  Tau <- MK.orig["Tau"]
-  MKtau <- function(x) mkttest(x)[["Tau"]]
+  Z<-round(MK.orig[[1]], digits = 7)
+  slp<-round(MK.orig[[2]], digits = 7)
+  S<-MK.orig[[3]]
+  Tau <- round(MK.orig[[6]], digits = 7)
+  MKtau <- function(x) mkttest(x)[[6]]
   boot.out.MKtau <- tsboot(x, MKtau, R=nsim, l=bl.len, sim="fixed")
   MKZ <- function(x) mkttest(x)[[1]]
   boot.out.Zval <- tsboot(x, MKZ, R=nsim, l=bl.len, sim="fixed")
@@ -161,11 +161,13 @@ bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
   lb.MKZ <- round(sort(boot.out.Zval$t)[(1-ci)*nsim], digits = 7)
   ub.MKZ <- round(sort(boot.out.Zval$t)[ci*nsim], digits = 7)
 
-  cat(paste("Z-Value = ", Z,
-            "Sen's Slope = ", slp,
-            "S = ", S,
-            "Kendall's Tau = ", Tau,
-            "Kendall's Tau Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKtau,ub.MKtau),
-            "Z-value Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKZ,ub.MKZ),sep="\n"))
+  return(c("Z-Value"=Z, 
+           "Sen's Slope"=slp, 
+           "S"=S, 
+           "Kendall's Tau"=Tau, 
+           "Kendall's Tau Empirical Bootstrapped CI Lower Bound"=lb.MKtau, 
+           "Kendall's Tau Empirical Bootstrapped CI Upper Bound"=ub.MKtau, 
+           "Z-value Empirical Bootstrapped CI Lower Bound"=lb.MKZ,
+           "Z-value Empirical Bootstrapped CI Upper Bound"=ub.MKZ))
 
 }
