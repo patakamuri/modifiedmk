@@ -37,8 +37,8 @@ The package contains the following varians of Trend-Tests
 
 [![Build Status](https://travis-ci.org/patakamuri/modifiedmk.svg?branch=master)](https://travis-ci.org/patakamuri/modifiedmk)
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/modifiedmk)](https://cran.r-project.org/package=modifiedmk)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/modifiedmk)](https://cran.r-project.org/package=modifiedmk)
 
-[![Rdoc](http://www.rdocumentation.org/badges/version/modifiedmk)](http://www.rdocumentation.org/packages/modifiedmk)
+[![Rdoc](https://www.rdocumentation.org/badges/version/modifiedmk)](http://www.rdocumentation.org/packages/modifiedmk)
 
 

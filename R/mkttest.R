@@ -35,9 +35,7 @@
 #'
 mkttest <-function(x) {
   # Initialize the test parameters
-
   options(scipen = 999)
-
   # Time series vector
   x = x
   # Mann-Kendall Z statistic

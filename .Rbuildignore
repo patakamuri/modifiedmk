@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^\.github$
+^\.httr-oauth
+^docs$
+^CRAN-RELEASE$
