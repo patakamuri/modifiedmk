@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @references Lehmann, E. L. (1975). Nonparametrics: statistical methods based on ranks. Holden-Day, Inc., California, 457 pp.
-#' 
+#'
 #' @references Sneyers, R. (1990). On the statistical analysis of series of observations. World Meteorological Organization, Technical Note no. 143, WMO no. 415, 192 pp.
 #'
 #' @details Spearman's Rank Correlation test by Lehmann (1975) and Sneyers (1990) is implemeted in this function.
@@ -26,32 +26,32 @@
 
 spear<-function(x) {
   # Initialize the test parameters
-  
+  options(scipen = 999)
   # Time series vector
   x=x
   #Correlation coefficient
   rhos=NULL
   #Z-tranformed Test Statistic value
   tsrc=NULL
-  
+
   # creating a sequential series whose length is equal to the input data
   xi<-1:length(x)
-  
+
   # To test whether the data is in vector format
-  
+
   if (is.vector(x) == FALSE) {
     stop("Input data must be a vector")
   }
-  
+
   # To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
-  
+
   if (any(is.finite(x) == FALSE)) {
     x[-c(which(is.finite(x) == FALSE))] -> x
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-  
+
   n<-length(x)
-  
+
   #Specify minimum input vector length
   if (n < 3) {
     stop("Input vector must contain at least three values")

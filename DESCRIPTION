@@ -1,14 +1,14 @@
 Package: modifiedmk
-Title: Modified Versions of Mann Kendall and Spearman's Rho Trend Tests 
-<<<<<<< HEAD
-Version: 1.4.0
-Authors@R: c(person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre")),person("Nicole", "O'Brien", email = "nobrien@uwaterloo.ca", role = c("aut", "ctb")))
+Title: Modified Versions of Mann Kendall and Spearman's Rho Trend Tests
+Version: 1.6
+Authors@R: c(person("Sandeep Kumar", "Patakamuri", 
+            email = "sandeep.patakamuri@gmail.com", 
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0001-8965-8287")),
+            person("Nicole", "O'Brien", 
+            email = "nobrien@uwaterloo.ca", 
+            role = c("aut", "ctb")))
 Description: Power of non-parametric Mann-Kendall test and Spearman’s Rho test is highly influenced by serially correlated data. To address this issue, trend tests may be applied on the modified versions of the time series data by  Block Bootstrapping (BBS), Prewhitening (PW) , Trend Free Prewhitening (TFPW), Bias Corrected Prewhitening and Variance Correction Approach by calculating effective sample size.
-=======
-Version: 1.2.0
-Authors@R: c(person("Sandeep Kumar", "Patakamuri", email = "sandeep.patakamuri@gmail.com", role = c("aut", "cre")),person("Nicole", "O'Brien", email = "nobrien@uwaterloo.ca", role = c("aut", "ctb")))
-Description:  Power of non-parametric Mann-Kendall test and Spearman’s Rho test is highly influenced by serially correlated data. To address this issue, trend tests may applied on the modified versions of the time series data by  Block Bootstrapping (BBS), Prewhitening (PW) , Trend Free Prewhitening (TFPW), Bias Corrected Prewhitening and Variance Correction Approach by calculating effective sample size.
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
     Mann, H. B. (1945).<doi:10.1017/CBO9781107415324.004>.
     Kendall, M. (1975). Multivariate analysis. Charles Griffin&Company Ltd,. 
     sen, P. K. (1968).<doi:10.2307/2285891>.
@@ -23,6 +23,15 @@ Imports: boot
 License: AGPL-3
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    covr
+NeedsCompilation: no
+Packaged: 2019-06-14 17:09:36 UTC; Deepu
+Maintainer: Sandeep Kumar Patakamuri <sandeep.patakamuri@gmail.com>
+Repository: CRAN
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
-Suggests: testthat, knitr, rmarkdown,covr
+Config/testthat/edition: 3

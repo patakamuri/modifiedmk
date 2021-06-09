@@ -2,11 +2,7 @@
 % Please edit documentation in R/bbsmk.R
 \name{bbsmk}
 \alias{bbsmk}
-<<<<<<< HEAD
 \title{Nonparametric Block Bootstrapped Mann-Kendall Trend Test}
-=======
-\title{Block bootstrapped Mann-Kendall Trend Test}
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 \usage{
 bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
 }
@@ -38,17 +34,10 @@ Z-value Empirical Bootstrapped CI - Z-value empirical bootstrapped confidence in
 Significant serial correlation present in time series data can be accounted for using the nonparametric block bootstrap technique, which incorporates the Mann-Kendall trend test (Mann, 1945; Kendall, 1975; Kundzewicz and Robson, 2000).  Predetermined block lengths are used in resampling the original time series, thus retaining the memory structure of the data.  If the value of the test statistic falls in the tails of the empirical bootstrapped distribution, there is likely a trend in the data.  The block bootstrap technique is powerful in the presence of autocorrelation (Khaliq et al. 2009; Önöz and Bayazit, 2012).
 }
 \details{
-<<<<<<< HEAD
 Block lengths are automatically selected using the number of contiguous significant serial correlations, to which the eta (\eqn{\eta}) term is added. A value of \eqn{\eta = 1} is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
 }
 \examples{
 x<-c(Nile[1:10])
-=======
-The block bootstrap is used along with the non-parametric Mann-Kendall trend test.  A test statistic falling in the tails of the simulated empirical distribution, the results is likely significant.
-}
-\examples{
-x<-c(Nile)
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 bbsmk(x)
 
 }

@@ -8,8 +8,6 @@
 #'
 #' @usage bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
 #'
-#' @usage bbsmk(x, ci=0.95, nsim=2000, eta=1, bl.len=NULL)
-#'
 #' @param  x  - Time series data vector
 #'
 #' @param  ci - Confidence interval
@@ -48,124 +46,89 @@
 #'
 #' @references Svensson, C., Kundzewicz, Z. W., and Maurer, T. (2005). Trend detection in river flow series: 2. Floods and low-flow index series. Hydrological Sciences Journal, 50(5): 811-823.
 #'
-<<<<<<< HEAD
 #' @details Block lengths are automatically selected using the number of contiguous significant serial correlations, to which the eta (\eqn{\eta}) term is added. A value of \eqn{\eta = 1} is used as the default as per Khaliq et al. (2009).  Alternatively, the user may define the block length.  2000 bootstrap replicates are recommended as per Svensson et al. (2005) and Önöz, B. and Bayazit (2012).
 #'
 #' @examples x<-c(Nile[1:10])
-=======
-#' @details The block bootstrap is used along with the non-parametric Mann-Kendall trend test.  A test statistic falling in the tails of the simulated empirical distribution, the results is likely significant.
-#'
-#' @examples x<-c(Nile)
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
 #' bbsmk(x)
 #'
 #' @export
 #'
-bbsmk <- function(x,ci=0.95,nsim=2000,eta=1, bl.len=NULL) {
-<<<<<<< HEAD
-  # Initialize the test parameters
-=======
-  # Initialize the test Parameters
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
-
-  # Time-series vector
+bbsmk<-function (x, ci = 0.95, nsim = 2000, eta = 1, bl.len = NULL)
+{
+  options(scipen = 999)
   x = x
-  # Confidance interval
   ci = ci
-  #Number of simulations
-  nsim=nsim
-  #Value of eta
-  eta=eta
-  #Initialization of block length
-  bl.len=bl.len
-  # Mann-Kendall Tau
+  nsim = nsim
+  eta = eta
+  bl.len = bl.len
   Tau = NULL
-  # To test whether the data is in vector format
-
   if (is.vector(x) == FALSE) {
     stop("Input data must be a vector")
   }
-
-  n<-length(x)
-
-  #Specify minimum input vector length
+  n <- length(x)
   if (n < 4) {
     stop("Input vector must contain at least four values")
   }
-
-  #Specify minimum block length
   if (is.null(bl.len) == FALSE)
     if (bl.len > n) {
       stop("Block length must be less than the time series length")
     }
-
-  # To test whether the data values are finite numbers and attempting to eliminate non-finite numbers
   if (any(is.finite(x) == FALSE)) {
-    x[-c(which(is.finite(x) == FALSE))] -> x
+    x <- x[-c(which(is.finite(x) == FALSE))]
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-  
-  n<-length(x)
-
+  n <- length(x)
   if (is.null(bl.len) == TRUE) {
-    #bounds of the confidence intervals of the acf function
-
     bd <- qnorm((1 + ci)/2)/sqrt(n)
-
-    # Calculating autocorrelation function of the observations (ro)
-
-    ro <- acf(x, lag.max=round(n/4), plot=FALSE)$acf[-1]
-
-    #Initialize vector of significant lags of autocorrelation
-
+    ro <- acf(x, lag.max = round(n/4), plot = FALSE)$acf[-1]
     sig.v <- rep(0, round(n/4))
-
-    #Identify the number of contiguous significant serial correlations
-
+    sig.vv <- rep(0, round(n/4))
     for (i in 1:round(n/4)) {
       if (-bd > ro[i] | bd < ro[i]) {
-        sig.v[i]<-ro[i]
+        sig.v[i] <- ro[i]
       }
     }
-
     if (all(sig.v == 0)) {
-      min.sig<-0
-    } else {
-      min.sig.init<-rle(sig.v)
-      min.sig<-max(min.sig.init$lengths[min.sig.init$values != 0])
+      min.sig <- 0
     }
-
-    #Block length
-
+    else {
+      for (j in 1:length(sig.v)) {
+        if (-bd > sig.v[j] | bd < sig.v[j]) {
+          sig.vv[j]<-1
+        }
+      }
+      min.sig.init <- rle(sig.vv)
+      if (all(sig.vv == 0)) {
+        min.sig <- 0
+      } else {
+        min.sig <- max(min.sig.init$lengths[min.sig.init$values != 0])
+      }
+    }
     bl.len <- min.sig + eta
-
   }
-
-<<<<<<< HEAD
-  #Block bootstrap using Mann-Kendall
-=======
-    #Block bootstrap using Mann Kendall
->>>>>>> 7ff826888efb68f649e807680e4fbb2c94acb89c
-
   MK.orig <- mkttest(x)
-  Z<-round(MK.orig["Z-Value"], digits = 7)
-  slp<-round(MK.orig["Sen's slope"], digits = 7)
-  S<-MK.orig["S"]
-  Tau <- MK.orig["Tau"]
-  MKtau <- function(x) mkttest(x)[["Tau"]]
-  boot.out.MKtau <- tsboot(x, MKtau, R=nsim, l=bl.len, sim="fixed")
+  Z <- round(MK.orig[[1]], digits = 7)
+  slp <- round(MK.orig[[2]], digits = 7)
+  S <- MK.orig[[3]]
+  p <- MK.orig[[5]]
+  Tau <- round(MK.orig[[6]], digits = 7)
+  MKtau <- function(x) mkttest(x)[[6]]
+  boot.out.MKtau <- tsboot(x, MKtau, R = nsim, l = bl.len,
+                           sim = "fixed")
   MKZ <- function(x) mkttest(x)[[1]]
-  boot.out.Zval <- tsboot(x, MKZ, R=nsim, l=bl.len, sim="fixed")
-  lb.MKtau <- round(sort(boot.out.MKtau$t)[(1-ci)*nsim], digits = 7)
-  ub.MKtau <- round(sort(boot.out.MKtau$t)[ci*nsim], digits = 7)
-  lb.MKZ <- round(sort(boot.out.Zval$t)[(1-ci)*nsim], digits = 7)
-  ub.MKZ <- round(sort(boot.out.Zval$t)[ci*nsim], digits = 7)
-
-  cat(paste("Z-Value = ", Z,
-            "Sen's Slope = ", slp,
-            "S = ", S,
-            "Kendall's Tau = ", Tau,
-            "Kendall's Tau Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKtau,ub.MKtau),
-            "Z-value Empirical Bootstrapped CI =", sprintf("(%s,%s)",lb.MKZ,ub.MKZ),sep="\n"))
-
+  boot.out.Zval <- tsboot(x, MKZ, R = nsim, l = bl.len, sim = "fixed")
+  lb.MKtau <- round(sort(boot.out.MKtau$t)[(1 - ci)/2 * nsim],
+                    digits = 7)
+  ub.MKtau <- round(sort(boot.out.MKtau$t)[(1 + ci)/2 * nsim], digits = 7)
+  lb.MKZ <- round(sort(boot.out.Zval$t)[(1 - ci)/2 * nsim], digits = 7)
+  ub.MKZ <- round(sort(boot.out.Zval$t)[(1 + ci)/2 * nsim], digits = 7)
+  return(c("Z-Value"=Z,
+           "Sen's Slope"=slp,
+           "S"=S,
+           "P-value"=p,
+           "Kendall's Tau"=Tau,
+           "Kendall's Tau Empirical Bootstrapped CI Lower Bound"=lb.MKtau,
+           "Kendall's Tau Empirical Bootstrapped CI Upper Bound"=ub.MKtau,
+           "Z-value Empirical Bootstrapped CI Lower Bound"=lb.MKZ,
+           "Z-value Empirical Bootstrapped CI Upper Bound"=ub.MKZ))
 }

@@ -36,6 +36,8 @@
 mkttest <-function(x) {
   # Initialize the test parameters
 
+  options(scipen = 999)
+
   # Time series vector
   x = x
   # Mann-Kendall Z statistic
@@ -63,7 +65,7 @@ mkttest <-function(x) {
   }
 
   n<-length(x)
-  
+
   #Specify minimum input vector length
   if (n < 3) {
     stop("Input vector must contain at least three values")
@@ -94,7 +96,7 @@ mkttest <-function(x) {
 
   if (S == 0) {
     z = 0
-  }
+  } else
   if (S > 0) {
     z = (S-1)/sqrt(var.S)
   } else {

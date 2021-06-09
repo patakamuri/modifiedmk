@@ -13,21 +13,21 @@
 #' @param pw -  Optional bias corrected prewhitening suggested by Hamed (2009)
 #'
 #' @return  Z Value - Mann-Kendall Z statistic from original data
-#' 
+#'
 #' @return  Sen's Slope - Sen's slope from the original data
-#' 
+#'
 #' @return  S - Mann-Kendall S statistic
-#' 
+#'
 #' @return  Kendall's Tau - Mann-Kendall's Tau
-#' 
+#'
 #' @return  BCP Z Value - Bias corrected prewhitened Z value
-#' 
+#'
 #' @return  BCP Sen's Slope - Bias corrected prewhitened Sen's slope
-#' 
+#'
 #' @return  BCP S - Bias corrected prewhitened S
-#' 
+#'
 #' @return  BCP Kendall's Tau - Bias corrected prewhitened Kendall's Tau
-#' 
+#'
 #' @return  Bootstrapped P-Value - Mann-Kendall bootstrapped p-value
 #'
 #' @references Hamed, K. H. (2009). Enhancing the effectiveness of prewhitening in trend analysis of hydrologic data. Journal of Hydrology, 368: 143-155.
@@ -45,7 +45,7 @@
 #' @references Yue, S. and Pilon, P. (2004). A comparison of the power of the t test, Mann-Kendall and bootstrap tests for trend detection, Hydrological Sciences Journal, 49(1): 21-37.
 #'
 #' @details Bootstrapped samples are calculated by resampling one value at a time from the time series with replacement.  The p-value (\eqn{p_s}) of the resampled data is estimated by (Yue and Pilon, 2004): \deqn{p_s = m_s/M} The Mann-Kendall test statistics (S) is calculated for each resampled dataset.  The resultant vector of resampled S statistics is then sorted in ascending ordering, where \eqn{p_s} is the rank corresponding the largest bootstrapped value of S being less than the test statistic value calculated from the actual data.  M is the total number of bootstrapped resamples.  The default value of M is 1000, however, Yue and Pilon (2004) suggest values between 1000 and 2000. If the user does not choose to apply prewhitening, this argument 'pw' can be set to NULL.
-#' 
+#'
 #'
 #' @examples x<-c(Nile[1:10])
 #' pbmk(x)
@@ -54,7 +54,7 @@
 #'
 pbmk <- function(x, nsim=1000, pw="Hamed") {
   # Initialize the test parameters
-
+  options(scipen = 999)
   # Time series vector
   x = x
   #Number of simulations
@@ -90,7 +90,7 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     x[-c(which(is.finite(x) == FALSE))] -> x
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-  
+
   nx<-length(x)
 
   if (is.null(pw) == FALSE) {
@@ -115,16 +115,17 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
 
     #Bootstrapped using Mann-Kendall
     MK.orig <- mkttest(x)
-    Z <- round(MK.orig["Z-Value"], digits = 7)
-    slp <- round(MK.orig["Sen's slope"], digits = 7)
-    Tau <- round(MK.orig["Tau"], digits = 7)
-    S.orig <- MK.orig["S"]
+    Z <- MK.orig[[1]]
+    slp <- MK.orig[[2]]
+    Tau <- MK.orig[[6]]
+    S.orig <- MK.orig[[3]]
+    P.orig <-MK.orig[[5]]
     MKpw <- mkttest(xn)
-    Zpw <- round(MKpw["Z-Value"], digits = 7)
-    slpPW <- round(MKpw["Sen's slope"], digits = 7)
-    TauPW <- round(MKpw["Tau"], digits = 7)
-    Spw <- MKpw["S"]
-    MKS <- function(xn) mkttest(xn)[["S"]]
+    Zpw <- MKpw[[1]]
+    slpPW <- MKpw[[2]]
+    TauPW <- MKpw[[6]]
+    Spw <- MKpw[[3]]
+    MKS <- function(xn) mkttest(xn)[[3]]
     boot.out.MKS <- tsboot(xn, MKS, R=nsim, l=1, sim="fixed")
     loc <- suppressWarnings(max(which(sort(boot.out.MKS$t) < Spw)))
     if (loc == -Inf) {
@@ -132,23 +133,24 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     }
     pval <- loc/nsim
 
-    cat(paste("Z Value = ", Z,
-              "Sen's Slope = ", slp,
-              "S = ", S.orig,
-              "Kendall's Tau = ", Tau,
-              "BCP Z Value = ", Zpw,
-              "BCP Sen's Slope = ", slpPW,
-              "BCP S = ", Spw,
-              "BCP Kendall's Tau = ", TauPW,
-              "Bootstrapped P-Value =", pval ,sep="\n"))
+    return(c("Z Value"=Z,
+             "Sen's Slope"=slp,
+             "S"=S.orig,
+             "p"=P.orig,
+             "Kendall's Tau"=Tau,
+             "BCP Z Value"=Zpw,
+             "BCP Sen's Slope"=slpPW,
+             "BCP S"=Spw,
+             "BCP Kendall's Tau"=TauPW,
+             "Bootstrapped P-Value"=pval))
   } else {
     #Bootstrapped using Mann-Kendall
     MK.orig <- mkttest(x)
-    Z <- round(MK.orig["Z-Value"], digits = 7)
-    slp <- round(MK.orig["Sen's slope"], digits = 7)
-    Tau <- round(MK.orig["Tau"], digits = 7)
-    S.orig <- MK.orig["S"]
-    MKS1 <- function(x) mkttest(x)[["S"]]
+    Z <- MK.orig[[1]]
+    slp <- MK.orig[[2]]
+    Tau <- MK.orig[[6]]
+    S.orig <- MK.orig[[3]]
+    MKS1 <- function(x) mkttest(x)[[3]]
     boot.out.MKS1 <- tsboot(x, MKS1, R=nsim, l=1, sim="fixed")
     loc <- suppressWarnings(max(which(sort(boot.out.MKS1$t) < S.orig)))
 
@@ -157,13 +159,10 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     }
     pval <- loc/nsim
 
-    cat(paste("Z Value = ", Z,
-              "Sen's Slope = ", slp,
-              "S = ", S.orig,
-              "Kendall's Tau = ", Tau,
-              "Bootstrapped P-Value =", pval ,sep="\n"))
+    return(c("Z Value"=Z,
+             "Sen's Slope"=slp,
+             "S"=S.orig,
+             "Kendall's Tau"=Tau,
+             "Bootstrapped P-Value"=pval))
   }
 }
-
-
-
