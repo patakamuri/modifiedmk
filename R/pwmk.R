@@ -1,6 +1,6 @@
-#' @title Mann-Kendall Test of Pre-Whitened Time Series Data in Presence of Serial Correlation Using Yue and Wang (2002) Approach.
+#' @title Mann-Kendall Test of Prewhitened Time Series Data in Presence of Serial Correlation Using the von Storch (1995) Approach
 #'
-#' @description When the time series data is not random and influenced by auto-correlation, Pre-Whitening the time series prior to application of trend test is suggested.
+#' @description When time series data are not random and influenced by autocorrelation, prewhitening the time series prior to application of trend test is suggested.
 #'
 #' @importFrom stats acf median pnorm qnorm
 #'
@@ -8,31 +8,33 @@
 #'
 #' @param  x  - Time series data vector
 #'
-#' @return  Z-Value  - Z-Statistic after Pre-Whitening
+#' @return  Z-Value  - Z statistic after prewhitening
 #'
-#' Sen's Slope  - Sen's slope for Prewhitened series
+#' Sen's Slope  - Sen's slope for prewhitened series
 #'
-#' old. Sen's Slope  - Sen's slope for Original data series 'x'
+#' old. Sen's Slope  - Sen's slope for original data series (x)
 #'
-#' P-value  - P-Value after Pre-Whitening
+#' P-value  - P-value after prewhitening
 #'
-#' S  - Mann-Kendall 'S'- statistic
+#' S  - Mann-Kendall S statistic
 #'
-#' Var(s) - Variance of 's'
+#' Var(s) - Variance of S
 #'
 #' Tau  - Mann-Kendall's Tau
 #'
-#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3), 245–259. <doi:10.1017/CBO9781107415324.004>
+#' @references Kendall, M. (1975). Rank Correlation Methods. Griffin, London, 202 pp.
 #'
-#' @references Kendall, M. (1975). Multivariate analysis. Charles Griffin. Londres. 0-85264-234-2.
+#' @references Kulkarni, A. and H. von Storch. 1995. Monte carlo experiments on the effects of serial correlation on the MannKendall test of trends. Meteorologische Zeitschrift N.F, 4(2): 82-85.
 #'
-#' @references Sen, P. K. (1968). Estimates of the Regression Coefficient Based on Kendall’s Tau. Journal of the American Statistical Association, 63(324), 1379. <doi:10.2307/2285891>
+#' @references Mann, H. B. (1945). Nonparametric Tests Against Trend. Econometrica, 13(3): 245-259.
 #'
-#' @references Yue, S., & Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), 4-1-4–7. <doi:10.1029/2001WR000861>
+#' @references Salas, J.D. (1980). Applied modeling of hydrologic times series. Water Resources Publication, 484 pp.
 #'
-#' @references Salas, J.D., (1980). Applied modeling of hydrologic times series. Water Resources Publication.
+#' @references von Storch, V. H. (1995). Misuses of statistical analysis in climate research, In: Analysis of Climate Variability: Applications of Statistical Techniques, ed. von H. V. Storch and A. Navarra A. Springer-Verlag, Berlin: 11-26.
 #'
-#' @details Pre-Whitening involves calculating lag-1 serial correlation coefficient and calculating new-series.
+#' @references Yue, S. and Wang, C. Y. (2002). Applicability of prewhitening to eliminate the influence of serial correlation on the Mann-Kendall test. Water Resources Research, 38(6), <doi:10.1029/2001WR000861>
+#'
+#' @details The lag-1 serial correlation coefficient is used for prewhitening.
 #'
 #' @examples x<-c(Nile)
 #' pwmk(x)
@@ -40,22 +42,20 @@
 #' @export
 #'
 pwmk <-function(x) {
-
-  # Initialize the test Parameters
-
-  # Time-Series Vector
+  # Initialize the test parameters
+  options(scipen = 999)
+  # Time series vector
   x = x
-  # Modified Z-Statistic after Pre-Whitening
+  # Modified Z statistic after prewhitening
   z = NULL
-  # Modified P-value after Pre-Whitening
+  # Modified p-value after prewhitening
   pval = NULL
-  # Initialize Mann-Kendall 'S'- Statistic
+  # Initialize Mann-Kendall S statistic
   S = 0
   # Initialize Mann-Kendall var.S
   var.S = NULL
   # Initialize Mann-Kendall Tau
   Tau = NULL
-
 
 
   # To test whether the data is in vector format
@@ -71,12 +71,18 @@ pwmk <-function(x) {
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
 
-  # Calculating lag-1 auto-correlation coefficient (ro)
+  n <- length(x)
+  #Specify minimum input vector length
+  if (n < 3) {
+    stop("Input vector must contain at least three values")
+  }
+
+  # Calculating lag-1 autocorrelation coefficient (ro)
 
   acf(x, lag.max=1, plot=FALSE)$acf[-1] -> ro
 
 
-  # Calculating pre-whitened Series
+  # Calculating prewhitened series
 
   a=1:(length(x)-1)
   b=2:(length(x))
@@ -86,7 +92,7 @@ pwmk <-function(x) {
   n1<-length(x)
 
 
-  # Calculating Mann-Kendall 'S'- Statistic
+  # Calculating Mann-Kendall S statistic
 
   for (i in 1:(n-1)) {
     for (j in (i+1):n) {
@@ -94,7 +100,7 @@ pwmk <-function(x) {
     }
   }
 
-  # Calculating Mann-Kendall Variance (Var(s))
+  # Calculating Mann-Kendall variance (Var(s))
 
   var.S = n*(n-1)*(2*n+5)*(1/18)
   if(length(unique(xn)) < n) {
@@ -107,28 +113,28 @@ pwmk <-function(x) {
     }
   }
 
-  # Calculating Z-Statistic values before and after Variance coorection
+  # Calculating Z statistic
 
   if (S == 0) {
     z = 0
-  }
+  }else
   if (S > 0) {
     z = (S-1)/sqrt(var.S)
     } else {
     z = (S+1)/sqrt(var.S)
    }
 
-  # Calculating P-Value before and after Variance coorection
+  # Calculating p-value
 
   pval = 2*pnorm(-abs(z))
 
 
-  # Calculating kendall's Tau
+  # Calculating Kendall's Tau
 
   Tau = S/(.5*n*(n-1))
 
 
-  # Calculating Sen's slope for original series 'x'
+  # Calculating Sen's slope for original series
 
   rep(NA, n1 * (n1 - 1)/2) -> V
   k = 0
