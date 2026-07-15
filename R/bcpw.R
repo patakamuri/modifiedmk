@@ -39,9 +39,9 @@
 #'
 #' @export
 #'
-bcpw <- function(x) {
+bcpw<-function(x) {
   # Initialize the test Parameters
-
+  options(scipen = 999)
   # Time-Series Vector
   x = x
   # Modified Z-Statistic after Pre-Whitening
@@ -68,8 +68,6 @@ bcpw <- function(x) {
     x[-c(which(is.finite(x) == FALSE))] -> x
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-
-  nx<-length(x)
 
   #Calculate the lag 1 autocorrelation coefficient and the intercept
   zx<-cbind(head(x,n=nx-1),matrix(data=1, nrow=(nx-1),ncol=1),tail(seq(1:nx),n=(nx-1)))
@@ -117,7 +115,7 @@ bcpw <- function(x) {
 
   if (S == 0) {
     z = 0
-  }
+  }else
   if (S > 0) {
     z = (S-1)/sqrt(var.S)
   } else {
@@ -158,11 +156,11 @@ bcpw <- function(x) {
   }
   median(W,na.rm=TRUE)->slp1
 
-  return(c("Z-Value" =  z,
-            "Prewhitened Sen's Slope" = slp1,
-            "Sen's Slope" = slp,
-            "P-value" = pval,
-            "S" = S,
-            "Var(S)" = var.S,
-            "Tau " = Tau))
+  return(c("Z-Value"=z,
+           "Prewhitened Sen's Slope"=slp1,
+           "Sen's Slope"=slp,
+           "P-value"=pval,
+           "S"=S,
+           "Var(S)"=var.S,
+           "Tau"=Tau))
 }

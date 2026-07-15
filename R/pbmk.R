@@ -13,21 +13,21 @@
 #' @param pw -  Optional bias corrected prewhitening suggested by Hamed (2009)
 #'
 #' @return  Z Value - Mann-Kendall Z statistic from original data
-#' 
+#'
 #' @return  Sen's Slope - Sen's slope from the original data
-#' 
+#'
 #' @return  S - Mann-Kendall S statistic
-#' 
+#'
 #' @return  Kendall's Tau - Mann-Kendall's Tau
-#' 
+#'
 #' @return  BCP Z Value - Bias corrected prewhitened Z value
-#' 
+#'
 #' @return  BCP Sen's Slope - Bias corrected prewhitened Sen's slope
-#' 
+#'
 #' @return  BCP S - Bias corrected prewhitened S
-#' 
+#'
 #' @return  BCP Kendall's Tau - Bias corrected prewhitened Kendall's Tau
-#' 
+#'
 #' @return  Bootstrapped P-Value - Mann-Kendall bootstrapped p-value
 #'
 #' @references Hamed, K. H. (2009). Enhancing the effectiveness of prewhitening in trend analysis of hydrologic data. Journal of Hydrology, 368: 143-155.
@@ -45,7 +45,7 @@
 #' @references Yue, S. and Pilon, P. (2004). A comparison of the power of the t test, Mann-Kendall and bootstrap tests for trend detection, Hydrological Sciences Journal, 49(1): 21-37.
 #'
 #' @details Bootstrapped samples are calculated by resampling one value at a time from the time series with replacement.  The p-value (\eqn{p_s}) of the resampled data is estimated by (Yue and Pilon, 2004): \deqn{p_s = m_s/M} The Mann-Kendall test statistics (S) is calculated for each resampled dataset.  The resultant vector of resampled S statistics is then sorted in ascending ordering, where \eqn{p_s} is the rank corresponding the largest bootstrapped value of S being less than the test statistic value calculated from the actual data.  M is the total number of bootstrapped resamples.  The default value of M is 1000, however, Yue and Pilon (2004) suggest values between 1000 and 2000. If the user does not choose to apply prewhitening, this argument 'pw' can be set to NULL.
-#' 
+#'
 #'
 #' @examples x<-c(Nile[1:10])
 #' pbmk(x)
@@ -54,7 +54,7 @@
 #'
 pbmk <- function(x, nsim=1000, pw="Hamed") {
   # Initialize the test parameters
-
+  options(scipen = 999)
   # Time series vector
   x = x
   #Number of simulations
@@ -90,7 +90,7 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     x[-c(which(is.finite(x) == FALSE))] -> x
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-  
+
   nx<-length(x)
 
   if (is.null(pw) == FALSE) {
@@ -164,6 +164,3 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
              "Bootstrapped P-Value"=pval))
   }
 }
-
-
-

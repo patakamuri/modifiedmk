@@ -41,7 +41,7 @@
 #'
 mmky1lag <-function(x) {
   # Initialize the test parameters
-
+  options(scipen = 999)
   # Time series vector
   x = x
   # Modified Z statistic after variance correction as per Yue and Wang (2004) method
@@ -150,7 +150,7 @@ mmky1lag <-function(x) {
   if (S == 0) {
     z = 0
     z0 = 0
-  }
+  }else
   if (S > 0) {
     z = (S-1)/sqrt(VS)
     z0 = (S-1)/sqrt(var.S)

@@ -49,7 +49,7 @@
 
 mmkh3lag <-function(x, ci=0.95) {
   # Initialize the test parameters
-
+  options(scipen = 999)
   # Time series vector
   x = x
   # Modified Z statistic after variance correction by Hamed Rao (1998) method
@@ -81,14 +81,14 @@ mmkh3lag <-function(x, ci=0.95) {
     x[-c(which(is.finite(x) == FALSE))] -> x
     warning("The input vector contains non-finite numbers. An attempt was made to remove them")
   }
-  
+
   n <- length(x)
-  
+
   #Specify minimum input vector length
   if (n < 3) {
     stop("Input vector must contain at least three values")
   }
-  
+
   # Calculating Sen's slope
   rep(NA, n * (n - 1)/2) -> V
   k = 0
@@ -167,7 +167,7 @@ mmkh3lag <-function(x, ci=0.95) {
   if (S == 0) {
      z = 0
      z0 = 0
-   }
+   }else
    if (S > 0) {
      z = (S-1)/sqrt(VS)
      z0 = (S-1)/sqrt(var.S)

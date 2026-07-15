@@ -41,7 +41,7 @@
 #'
 mmky <-function(x) {
   # Initialize the test parameters
-
+  options(scipen = 999)
   # Time series Vector
   x = x
   # Modified Z statistic after variance correction as per Yue and Wang (2004) method
@@ -73,12 +73,12 @@ mmky <-function(x) {
   }
 
   n <- length(x)
-  
+
   #Specify minimum input vector length
   if (n < 3) {
     stop("Input vector must contain at least three values")
   }
-  
+
   # Calculating Sen's slope
 
   rep(NA, n * (n - 1)/2) -> V
@@ -152,7 +152,7 @@ mmky <-function(x) {
   if (S == 0) {
     z = 0
     z0 = 0
-  }
+  }else
   if (S > 0) {
     z = (S-1)/sqrt(VS)
     z0 = (S-1)/sqrt(var.S)
