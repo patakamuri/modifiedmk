@@ -119,7 +119,6 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     slp <- MK.orig[[2]]
     Tau <- MK.orig[[6]]
     S.orig <- MK.orig[[3]]
-    P.orig <-MK.orig[[5]]
     MKpw <- mkttest(xn)
     Zpw <- MKpw[[1]]
     slpPW <- MKpw[[2]]
@@ -136,7 +135,6 @@ pbmk <- function(x, nsim=1000, pw="Hamed") {
     return(c("Z Value"=Z,
              "Sen's Slope"=slp,
              "S"=S.orig,
-             "p"=P.orig,
              "Kendall's Tau"=Tau,
              "BCP Z Value"=Zpw,
              "BCP Sen's Slope"=slpPW,

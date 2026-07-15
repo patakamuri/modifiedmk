@@ -99,15 +99,20 @@ bbssr<-function (x, ci = 0.95, nsim = 2000, eta = 1, bl.len = NULL)
     }
     bl.len <- min.sig + eta
   }
-  SR.orig <- round(spear(x)[[1]], digits = 7)
-  Z_trans <- round(spear(x)[[2]], digits = 7)
+
+
+  #Block bootstrap using Spearman's Rank Correlation
+
+  SR.orig<-round(spear(x)[[1]], digits = 7)
+  Z_trans<-round(spear(x)[[2]], digits = 7)
   SRfunc <- function(x) spear(x)[[2]]
-  boot.out <- tsboot(x, SRfunc, R = nsim, l = bl.len, sim = "fixed")
-  lb <- round(sort(boot.out$t)[(1 - ci)/2 * nsim], digits = 7)
-  ub <- round(sort(boot.out$t)[(1 + ci)/2 * nsim], digits = 7)
-  return(c("Spearman's Correlation Coefficient"=SR.orig,
-           "Z-Transformed Test Statistic"=Z_trans,
-           "Z-Transformed Test Statistic Empirical Bootstrapped CI Lower Bound"=lb,
-           "Z-Transformed Test Statistic Empirical Bootstrapped CI Upper Bound"=ub))
+  boot.out <- tsboot(x, SRfunc, R=nsim, l=bl.len, sim="fixed")
+  lb <- round(sort(boot.out$t)[(1-ci)*nsim], digits = 7)
+  ub <- round(sort(boot.out$t)[ci*nsim], digits = 7)
+
+    return(c("Spearman's Correlation Coefficient"=SR.orig, 
+             "Z-Transformed Test Statistic"=Z_trans, 
+             "Z-Transformed Test Statistic Empirical Bootstrapped CI Lower Bound"=lb, 
+             "Z-Transformed Test Statistic Empirical Bootstrapped CI Upper Bound"=ub)) 
 }
 
