@@ -104,8 +104,9 @@ mmky <-function(x) {
     }
   }
 
-  # Calculating auto-correlation function of the observations (ro)
-  #lag.max can be edited to include more number of lags
+  # Calculating autocorrelation function of the observations (ro)
+
+  #lag.max can be edited to include greater numbers of lags
 
   acf(xn, lag.max=(n-1), plot=FALSE)$acf[-1] -> ro
 
