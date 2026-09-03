@@ -110,19 +110,21 @@ bbsmk<-function (x, ci = 0.95, nsim = 2000, eta = 1, bl.len = NULL)
   Z<-round(MK.orig[[1]], digits = 7)
   slp<-round(MK.orig[[2]], digits = 7)
   S<-MK.orig[[3]]
+  p <- MK.orig[[5]]
   Tau <- round(MK.orig[[6]], digits = 7)
   MKtau <- function(x) mkttest(x)[[6]]
   boot.out.MKtau <- tsboot(x, MKtau, R=nsim, l=bl.len, sim="fixed")
   MKZ <- function(x) mkttest(x)[[1]]
   boot.out.Zval <- tsboot(x, MKZ, R=nsim, l=bl.len, sim="fixed")
-  lb.MKtau <- round(sort(boot.out.MKtau$t)[(1-ci)*nsim], digits = 7)
-  ub.MKtau <- round(sort(boot.out.MKtau$t)[ci*nsim], digits = 7)
-  lb.MKZ <- round(sort(boot.out.Zval$t)[(1-ci)*nsim], digits = 7)
-  ub.MKZ <- round(sort(boot.out.Zval$t)[ci*nsim], digits = 7)
+  lb.MKtau <- round(sort(boot.out.MKtau$t)[(1-ci)/2*nsim], digits = 7)
+  ub.MKtau <- round(sort(boot.out.MKtau$t)[(1+ci)/2*nsim], digits = 7)
+  lb.MKZ <- round(sort(boot.out.Zval$t)[(1-ci)/2*nsim], digits = 7)
+  ub.MKZ <- round(sort(boot.out.Zval$t)[(1+ci)/2*nsim], digits = 7)
 
   return(c("Z-Value"=Z, 
            "Sen's Slope"=slp, 
            "S"=S, 
+           "P-value"=p, 
            "Kendall's Tau"=Tau, 
            "Kendall's Tau Empirical Bootstrapped CI Lower Bound"=lb.MKtau, 
            "Kendall's Tau Empirical Bootstrapped CI Upper Bound"=ub.MKtau, 
